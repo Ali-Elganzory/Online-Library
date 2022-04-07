@@ -15,7 +15,7 @@
 
 <div>
 
-    <?= $hello ?>
+    <?= "Sorry this page is not available." ?>
 
 </div>
 
