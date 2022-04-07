@@ -1,0 +1,38 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#full-size {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.grid-container {
+    display: grid;
+}
+
+.left-column {
+    grid-column: 1 / span 2;
+    background-color: #6C63FF;
+}
+
+.right-column {
+    grid-column: 3 / span 3;
+    background-color: white;
+}
+
+#back-button {
+    padding-top: 3em;
+    padding-left: 3em;
+}
+
+#back-button:hover {
+    cursor: pointer;
+}
