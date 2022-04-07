@@ -1,0 +1,16 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: 120px;
+    grid-template-rows: 130px 70px;
+    border-radius: 25px;
+}
+
+.grid-image{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.grid-text{
+    grid-column: 1;
+    grid-row: 2;
+}

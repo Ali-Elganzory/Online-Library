@@ -3,10 +3,10 @@
 <body>
     <div class="grid-container">
         <?php foreach ($books as $book): ?>
-            <div class="grid-item">
+            <div class="grid-image">
                 <img src="<?php echo $book->imageUrl; ?>" />
             </div>
-            <div class="grid-item">
+            <div class="grid-text">
                 <p>
                     <strong> <?php echo $book->title ?></strong>
                     <br>
