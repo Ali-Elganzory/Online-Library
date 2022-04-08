@@ -12,3 +12,21 @@ image{
 .book-desc{
     font-size: 13px;
 }
+
+.boxes {
+
+    display: inline-block;
+}
+
+rect.btn {
+    stroke:#fff;
+    fill:#fff;
+    fill-opacity:0;
+    stroke-opacity:0;
+}
+
+rect.btn:hover {
+    fill: aqua;
+    fill-opacity: 0.1;
+    animation: backwards;
+}
