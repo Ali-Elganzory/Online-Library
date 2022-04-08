@@ -9,14 +9,13 @@
 
     <title><?= $book->title ?></title>
 
-    <link rel="stylesheet" href="book_details.css">
+    <link rel="stylesheet" href="views/book_details/book_details.css">
 
 </head>
 
 <body>
 
 <div id="book_details_page">
-
     <div class="height-max width-max row cross-stretch">
         <div class="bg-primary-color flex-4">
             <svg class="mt-4 ml-4" xmlns="http://www.w3.org/2000/svg" width="50.483" height="50.483"
