@@ -2,6 +2,13 @@
 
 $requestUri = $_SERVER['REQUEST_URI'];
 
+try {
+    $pdo = new PDO("mysql:host=127.0.0.1;dbname=online_library", 'root', '1234');
+} catch (PDOException $e) {
+    die("Couldn't connect to db.");
+}
+
+
 // Router
 switch ($requestUri) {
     case '' :
