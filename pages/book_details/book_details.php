@@ -7,6 +7,7 @@ $book = new Book(
     description: "Black black black black black black black black black black black",
     imageUrl: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/8bc21955316461.59b89b39bc96d.jpg",
     favourite: false,
+    views: 12,
 );
 
 require 'book_details.view.php';
