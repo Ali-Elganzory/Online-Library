@@ -6,7 +6,7 @@
 <body>
 <div>
     <?php foreach ($books as $book): ?>
-        <div class="boxes" style="padding: 20px">
+        <div class="boxes" style="padding: 15px">
             <svg width="210px" height="310px" style="border-radius: 20px;">
                 <defs>
                     <filter id="text-filter" x="0" y="0" width="110%" height="110%">
