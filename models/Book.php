@@ -7,6 +7,7 @@ class Book
         public string $description,
         public string $imageUrl,
         public bool   $favourite,
+        public int    $views,
     )
     {
     }
