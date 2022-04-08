@@ -1,16 +1,14 @@
-.grid-container{
-    display: grid;
-    grid-template-columns: 120px;
-    grid-template-rows: 130px 70px;
-    border-radius: 25px;
+
+image{
+    height: 100%;
+    width: 120%;
 }
 
-.grid-image{
-    grid-column: 1;
-    grid-row: 1;
+.book-title{
+    font-weight: bold;
+    font-size: 20px;
 }
 
-.grid-text{
-    grid-column: 1;
-    grid-row: 2;
+.book-desc{
+    font-size: 13px;
 }
