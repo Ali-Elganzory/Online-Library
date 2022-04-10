@@ -1,6 +1,5 @@
 <?php
 
-$router->define([
-    '' => 'controllers/book_details.php',
-    'book_details' => 'controllers/book_details.php',
-]);
+$router->get('', 'controllers/book_details.php');
+
+$router->get('book_details', 'controllers/book_details.php');
