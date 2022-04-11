@@ -24,41 +24,50 @@ class FileChangedEventHandler(RegexMatchingEventHandler):
 
 
 def main():
-    # config
-    protocol = "http"
-    host = "localhost"
-    port = "8080"
-    url = f"{protocol}://{host}:{port}"
-
-    # run server
-    server_process = subprocess.Popen(f"php -S {host}:{port}",
-                                      shell=True)
-
     try:
 
+        # config
+        protocol = "http"
+        host = "localhost"
+        port = "8080"
+        url = f"{protocol}://{host}:{port}"
+
+        # run server
+        server_process = subprocess.Popen(f"php -S {host}:{port}",
+                                          shell=True)
+
         # open browser tab
-        driver: Edge
-        with Edge() as driver:
-            driver.get(url)
+        driver: Edge = Edge()
+        driver.get(url)
 
-            # watch files
-            event_handler = FileChangedEventHandler(driver=driver,
-                                                    regexes=[r".*\.php$", r".*\.css$"])
-            observer = Observer()
-            observer.schedule(event_handler, path='.', recursive=True)
-            observer.start()
+        # watch files
+        event_handler = FileChangedEventHandler(driver=driver,
+                                                regexes=[r".*\.php$", r".*\.css$"])
+        observer = Observer()
+        observer.schedule(event_handler, path='.', recursive=True)
+        observer.start()
 
-            try:
-                while observer.is_alive():
-                    observer.join(1)
+        # loop
+        while True:
+            k: str = input("To exit enter 'c':  \n")
+            if k.casefold() == 'c'.casefold():
+                raise Exception("SIGTERM")
 
-            finally:
-                observer.stop()
-                observer.join()
+    except Exception as e:
+        pass
 
     finally:
-        server_process.terminate()
-        server_process.kill
+        # terminate gracefully
+        if 'driver' in locals():
+            driver.quit()
+            print("Closed browser driver.")
+        if 'observer' in locals():
+            observer.stop()
+            observer.join()
+            print("Closed files observer.")
+        if 'server_process' in locals():
+            server_process.terminate()
+            print("Closed server.")
 
 
 if __name__ == "__main__":
