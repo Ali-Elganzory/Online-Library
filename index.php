@@ -14,3 +14,17 @@ require Router::load('routes.php')
         Request::uri(),
         Request::method()
     );
+
+
+/**
+ *
+ * Examples
+ *
+ *
+ * [Database]
+ *
+ * Book::all();
+ * Book::find(2);
+ * Book::where('views', '>=', '5')->limit(2)->get();
+ *
+ */
