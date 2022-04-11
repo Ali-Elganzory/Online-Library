@@ -32,7 +32,7 @@
         <div class="flex-1"></div>
         <div class="flex-3">
             <img class="width-max height-max box-fit-cover" style="width: 100%"
-                 src="<?= $book->imageUrl ?>"
+                 src="<?= $book->image_url ?>"
                  alt="Sorry, no cover at the time 😊.">
         </div>
         <div class="flex-6">

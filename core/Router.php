@@ -30,11 +30,9 @@ class Router
 
     public function direct(string $uri, string $method): string
     {
-        if (array_key_exists($uri, $this->routes[$method])) {
-
-            return $this->routes[$method][$uri];
+        if (!array_key_exists($uri, $this->routes[$method])) {
+            return $this->not_found_route;
         }
-
-        return $this->not_found_route;
+        return $this->routes[$method][$uri];
     }
 }

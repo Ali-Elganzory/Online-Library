@@ -1,7 +1,7 @@
 <?php
 
 
-class Book
+class Book extends Model
 {
 
     public function __construct(
@@ -9,25 +9,10 @@ class Book
         public string $title,
         public string $author,
         public string $description,
-        public string $imageUrl,
-        public bool   $favourite,
+        public string $image_url,
         public int    $views,
-    )
-    {
-    }
-
-
-    public static function fromPDO(stdClass $object): Book
-    {
-        return new Book(
-            $object['id'],
-            $object['title'],
-            $object['author'],
-            $object['description'],
-            $object['imageUrl'],
-            $object['favourite'],
-            $object['views'],
-        );
+        public bool   $favourite = false,
+    ) {
     }
 
 }
