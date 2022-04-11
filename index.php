@@ -1,9 +1,12 @@
 <?php
 
+// Autoloading
+require_once 'vendor/autoload.php';
+
 // Bootstrap.
 require 'core/bootstrap.php';
 
-// Redirect request.
+// Direct request.
 require Router::load('routes.php')
     ->direct(
         Request::uri(),

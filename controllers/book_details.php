@@ -1,7 +1,5 @@
 <?php
 
-require_once 'models/Book.php';
-
 $book = new Book(
     id: 1,
     title: "1984",

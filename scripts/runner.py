@@ -31,11 +31,13 @@ def main():
     url = f"{protocol}://{host}:{port}"
 
     # run server
-    server_process = subprocess.Popen(f"php -S {host}:{port}", shell=True)
+    server_process = subprocess.Popen(f"php -S {host}:{port}",
+                                      shell=True)
 
     try:
 
         # open browser tab
+        driver: Edge
         with Edge() as driver:
             driver.get(url)
 
@@ -49,6 +51,7 @@ def main():
             try:
                 while observer.is_alive():
                     observer.join(1)
+
             finally:
                 observer.stop()
                 observer.join()
