@@ -1,3 +1,3 @@
 <?php
 
-require 'components/topnavigator/topnavigator.view.php';
+require 'partials/topnavigator/topnavigator.view.php';
