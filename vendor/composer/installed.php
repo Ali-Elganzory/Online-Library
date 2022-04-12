@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '8127be3f8a71d037ce16ab60aefc8d0a2a638e3b',
+        'reference' => 'a807a6ec077e8ae22150cf5b193aedadc2fef676',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '8127be3f8a71d037ce16ab60aefc8d0a2a638e3b',
+            'reference' => 'a807a6ec077e8ae22150cf5b193aedadc2fef676',
             'dev_requirement' => false,
         ),
         'nowakowskir/php-jwt' => array(

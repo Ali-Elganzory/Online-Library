@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="components/topnavigator/topnavigator.css">
+<link rel="stylesheet" href="views/partials/topnavigator/topnavigator.css">
 <div class="topnav">
     <a href="#books">Books</a>
     <a href="#favourites">Favourites</a>

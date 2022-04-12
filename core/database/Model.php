@@ -32,7 +32,7 @@ class Model
      *
      * @var array|null
      */
-    protected static ?array $columns;
+    protected static ?array $columns = null;
 
 
     public
@@ -108,7 +108,7 @@ class Model
             return $result;
         }
 
-        $idColumnName = static::getPrimaryKey();
+        $idColumnName = static::primaryKey;
         $this->{$idColumnName} = $result->{$idColumnName};
         return true;
     }

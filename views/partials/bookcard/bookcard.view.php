@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="components/bookcard/bookcard.css">
+<link rel="stylesheet" href="views/partials/bookcard/bookcard.css">
 <div class="boxes" style="padding: 15px">
     <svg width="210px" height="310px" style="border-radius: 20px;">
         <defs>

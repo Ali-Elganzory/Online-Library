@@ -4,10 +4,10 @@
     <link rel="stylesheet" href="search_results.css">
 </head>
 <body>
-<div>
+<div style="padding: 100px">
 
     <?php foreach ($books as $book):
-        require 'components/bookcard/bookcard.view.php';
+        require 'views/partials/bookcard/bookcard.view.php';
     endforeach;?>
 </div>
 </body>

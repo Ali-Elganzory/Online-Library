@@ -4,9 +4,6 @@ use \Nowakowskir\JWT\{TokenDecoded, TokenEncoded, JWT};
 
 class Authentication
 {
-    public function register(){
-
-    }
     protected array $JWTHeader;
     protected int $exp;
     protected int $privateKey;
@@ -18,6 +15,36 @@ class Authentication
         $this->JWTHeader = $authConfig['JWTHeader'];
         $this->exp = $authConfig['exp'];
         $this->privateKey = $authConfig['privateKey'];
+    }
+
+    public
+    function register(){
+        $username = $_POST['newusername'] ?? "";
+        $password = $_POST['newpassword'] ?? "";
+        if (User::where('username', '=', $username)->exists()) {
+            return json([
+                'succeeded' => false,
+                'msg' => "username already exists",
+            ]);
+        }
+
+        $user = new User(0,$username,$password,'');
+
+        $user->insert();
+
+        $tokenEncoded = (
+            new TokenDecoded(
+                payload: [
+                    'admin'=> false,
+                    'exp' => time() + $this->exp
+                ],
+                header: $this->JWTHeader
+            ))->encode($this->privateKey, JWT::ALGORITHM_HS256);
+
+        return json([
+            'succeeded'=>true,
+            'token'=>$tokenEncoded->toString()]);
+
     }
 
     public
