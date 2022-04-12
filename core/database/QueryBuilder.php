@@ -4,8 +4,10 @@
 class QueryBuilder
 {
 
+    private string $_select = "";
+    private array $_joins = [];
     private array $_whereClauses = [];
-    private ?int $_limit = 0;
+    private int $_limit = 0;
 
 
     /**
@@ -14,9 +16,9 @@ class QueryBuilder
      * @param string|null $modelClass
      */
     private function __construct(
-        private PDO $pdo,
-        public      readonly string $table,
-        public      readonly ?string $modelClass,
+        private PDO    $pdo,
+        public string  $table,
+        public ?string $modelClass,
     )
     {
     }
@@ -29,19 +31,22 @@ class QueryBuilder
      * @throws Exception
      */
     public
-    static function table(
-        string $table
-    ): QueryBuilder
+    static function table(string $table): QueryBuilder
     {
         return new static(App::get('database'), $table, null);
     }
 
     public
-    static function model(
-        string $modelClass
-    ): QueryBuilder
+    static function model(string $modelClass): QueryBuilder
     {
         return new static(App::get('database'), $modelClass::getTableName(), $modelClass);
+    }
+
+    public
+    function class(string $modelClass): QueryBuilder
+    {
+        $this->modelClass = $modelClass;
+        return $this;
     }
 
     /**
@@ -68,7 +73,8 @@ class QueryBuilder
     public
     function find(mixed $id): bool|object
     {
-        $statement = $this->pdo->prepare("select * from {$this->table} where {$this->modelClass::getIdColumnName()} = {$id}");
+        $primaryKey = $this->modelClass::primaryKey;
+        $statement = $this->pdo->prepare("select * from {$this->table} where {$primaryKey} = {$id}");
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_OBJ);
 
@@ -93,6 +99,20 @@ class QueryBuilder
     }
 
     public
+    function select(string $select): QueryBuilder
+    {
+        $this->_select = $select;
+        return $this;
+    }
+
+    public
+    function join(string $table, string $firstColumn, string $operator, string $secondColumn): QueryBuilder
+    {
+        $this->_joins[] = "INNER JOIN {$table} ON {$firstColumn} {$operator} {$secondColumn}";
+        return $this;
+    }
+
+    public
     function where(string $column, string $operator, mixed $value = null): QueryBuilder
     {
         $value = gettype($value) == 'string' ? "'" . $value . "'" : $value;
@@ -114,15 +134,33 @@ class QueryBuilder
     public
     function get(): bool|array
     {
-        $query =
-            "SELECT *" . " " .
+        $query = "";
+
+        // SELECT
+        if (!empty($this->_select)) {
+            $query = $this->_select . " ";
+        } else {
+            $query =
+                "SELECT * ";
+        }
+
+        // FROM
+        $query = $query .
             "FROM " . $this->table . " ";
 
-        if (count($this->_whereClauses) > 0) {
+        // JOIN
+        if (!empty($this->_joins)) {
+            $query = $query .
+                join(" ", $this->_joins) . " ";
+        }
+
+        // WHERE
+        if (!empty($this->_whereClauses)) {
             $query = $query .
                 "WHERE " . join(", ", $this->_whereClauses) . " ";
         }
 
+        // LIMIT
         if ($this->_limit > 0) {
             $query = $query .
                 "LIMIT " . $this->_limit . " ";
@@ -174,7 +212,7 @@ class QueryBuilder
         $query =
             "UPDATE {$this->table} " .
             "SET {$cols} " .
-            "WHERE {$model::getIdColumnName()} = {$model->{$model::getIdColumnName()}} ";
+            "WHERE {$model::getPrimaryKey()} = {$model->{$model::getPrimaryKey()}} ";
 
         $statement = $this->pdo->prepare($query . ';');
         return $statement->execute();
@@ -186,7 +224,7 @@ class QueryBuilder
         $query =
             "DELETE " .
             "FROM {$this->table} " .
-            "WHERE {$model::getIdColumnName()} = {$model->{$model::getIdColumnName()}} ";
+            "WHERE {$model::getPrimaryKey()} = {$model->{$model::getPrimaryKey()}} ";
 
         $statement = $this->pdo->prepare($query . ';');
         return $statement->execute();
@@ -197,7 +235,7 @@ class QueryBuilder
     static function getSqlInsertCols(Model $model): string
     {
         return join(', ',
-            $model::$columns
+            $model::getColumns()
         );
     }
 
@@ -207,7 +245,7 @@ class QueryBuilder
         return join(', ',
             array_map(
                 fn($k) => static::valueToSqlString($model->{$k}),
-                $model::$columns,
+                $model::getColumns(),
             ),
         );
     }
@@ -218,7 +256,7 @@ class QueryBuilder
         return join(', ',
             array_map(
                 fn($k) => "{$k} = " . static::valueToSqlString($model->{$k}),
-                $model::$columns,
+                $model::getColumns(),
             )
         );
     }

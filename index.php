@@ -33,4 +33,15 @@ require Router::load('routes.php')
  *
  * $book->insert();
  *
+ * User::find(1)->favourites();
+ *
+ */
+
+/**
+ * ----------------
+ * Password Hashes
+ * ----------------
+ *
+ * 123456 => $2y$10$7KzIHMKsqMXdfrbBZtSLyutcBAUMSxmTe/GhYWbLDr3DyioOq9FmG
+ * 111111 => $2y$10$fYN3/Wa9GAjTOCTs5vHPKuT8f5.Be6F.qmpUOB0Pp/92HTjz8mlBi
  */

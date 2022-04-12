@@ -17,4 +17,6 @@ return array(
     'QueryBuilder' => $baseDir . '/core/database/QueryBuilder.php',
     'Request' => $baseDir . '/core/Request.php',
     'Router' => $baseDir . '/core/Router.php',
+    'User' => $baseDir . '/models/User.php',
+    'UserFavourite' => $baseDir . '/models/UserFavourite.php',
 );

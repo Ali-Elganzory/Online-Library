@@ -13,7 +13,7 @@ class Model
      *
      * @var string|null
      */
-    protected static ?string $tableName;
+    protected static ?string $table;
 
     /**
      * The column name of the primary key or id.
@@ -21,22 +21,22 @@ class Model
      *
      * If not specified, it'll implicitly be "id".
      *
-     * @var string|null
+     * @var string
      */
-    protected static ?string $idColumnName;
+    const primaryKey = "id";
 
     /**
      * The columns of the table except the primary key (i.e., id).
      *
-     * @var array
+     * @var array|null
      */
-    public static array $columns = [];
+    protected static ?array $columns;
 
 
     public
     static function getTableName(): string
     {
-        return static::$tableName ??
+        return static::$table ??
             strtolower(
                 preg_replace(
                     "/(?<!^)(?=[A-Z])/",
@@ -47,9 +47,16 @@ class Model
     }
 
     public
-    static function getIdColumnName(): string
+    static function getColumns(): array
     {
-        return static::$idColumnName ?? 'id';
+        if (static::$columns == null) {
+            $reflectionClass = (new ReflectionClass(static::class));
+            $propertyObjects = $reflectionClass->getProperties(ReflectionProperty::IS_PUBLIC);
+            $properties = array_map(fn($e) => $e->name, $propertyObjects);
+            return array_diff($properties, [static::primaryKey]);
+        }
+
+        return static::$columns;
     }
 
     public
@@ -91,7 +98,7 @@ class Model
             return $result;
         }
 
-        $idColumnName = static::getIdColumnName();
+        $idColumnName = static::getPrimaryKey();
         $this->{$idColumnName} = $result->{$idColumnName};
         return true;
     }
@@ -106,6 +113,35 @@ class Model
     function delete(): bool
     {
         return static::getQueryBuilder()->delete($this);
+    }
+
+    protected
+    function hasMany(string $otherClass, string $relationClass): QueryBuilder
+    {
+        $table = static::getTableName();
+        $primaryKey = static::primaryKey;
+        $relationTable = $relationClass::getTableName();
+        $otherTable = $otherClass::getTableName();
+        $otherPrimaryKey = $otherClass::primaryKey;
+        $foreignKey = substr($table, 0, -1) . '_' . $primaryKey;
+        $otherForeignKey = substr($otherTable, 0, -1) . '_' . $otherPrimaryKey;
+
+        return static::getQueryBuilder()
+            ->select("SELECT {$otherTable}.*")
+            ->join(
+                $relationTable,
+                "{$table}.{$primaryKey}",
+                '=',
+                "{$relationTable}.{$foreignKey}",
+            )
+            ->join(
+                $otherTable,
+                "{$relationTable}.{$otherForeignKey}",
+                '=',
+                "{$otherTable}.{$otherPrimaryKey}",
+            )
+            ->where("{$table}.{$primaryKey}", '=', $this->{$primaryKey})
+            ->class($otherClass);
     }
 
 }

@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS online_library;
 USE online_library;
 
 -- Drop tables.
-DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS books, users, user_favourites;
 
 -- Create tables.
 CREATE TABLE books
@@ -15,6 +15,23 @@ CREATE TABLE books
     description VARCHAR(400) DEFAULT '',
     image_url   VARCHAR(100) NOT NULL,
     views       INT          DEFAULT 0
+);
+
+CREATE TABLE users
+(
+    id        INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    username  VARCHAR(100) NOT NULL,
+    password  VARCHAR(100) NOT NULL,
+    image_url VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE user_favourites
+(
+    id      INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    book_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
 );
 
 -- Populate tables.
@@ -29,6 +46,19 @@ VALUES ("1984",
         "In a terrifying care-free future, a young man, Guy Montag, whose job as a fireman is to burn all books, questions his actions after meeting a young woman - and begins to rebel against society.",
         "https://upload.wikimedia.org/wikipedia/en/d/db/Fahrenheit_451_1st_ed_cover.jpg",
         107);
+
+INSERT INTO users (username, password, image_url)
+VALUES ("Tegan Price",
+        "$2y$10$7KzIHMKsqMXdfrbBZtSLyutcBAUMSxmTe/GhYWbLDr3DyioOq9FmG",
+        "https://tvline.com/wp-content/uploads/2019/11/htgawm-6x07-4.jpg"),
+       ("Connor Walsh",
+        "$2y$10$fYN3/Wa9GAjTOCTs5vHPKuT8f5.Be6F.qmpUOB0Pp/92HTjz8mlBi",
+        "https://www.cheatsheet.com/wp-content/uploads/2020/05/How-to-Get-Away-With-Murder-Connor.jpg");
+
+INSERT INTO user_favourites (user_id, book_id)
+VALUES (1, 1),
+       (1, 2),
+       (2, 2);
 
 -- Show tables.
 SHOW TABLES;
