@@ -1,4 +1,5 @@
 wireframe/
 documents/
-core/config.php
-.idea/php.xml
+# core/config.php
+.idea/
+.vscode/

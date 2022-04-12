@@ -9,7 +9,7 @@
 
     <title><?= $book->title ?></title>
 
-    <link rel="stylesheet" href="views/book_details/book_details.css">
+    <link rel="stylesheet" href="/views/book_details/book_details.css">
 
 </head>
 

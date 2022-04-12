@@ -4,9 +4,9 @@ class Pages
 {
 
     public
-    function bookDetails()
+    function bookDetails(int $id)
     {
-        $book = Book::find(1);
+        $book = Book::find($id);
 
         return view('book_details');
     }

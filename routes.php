@@ -2,7 +2,7 @@
 
 $router->get('', 'Pages@home');
 
-$router->get('book_details', 'Pages@bookDetails');
+$router->get('book_details/{id}', 'Pages@bookDetails');
 
 $router->get('search_results', 'Pages@search');
 

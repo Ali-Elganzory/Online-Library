@@ -36,20 +36,56 @@ class Router
     public
     function direct(string $uri, string $method)
     {
-        if (!array_key_exists($uri, $this->routes[$method])) {
+        $routes = $this->routes[$method];
+        $regexpToAction = [];
+
+        $regexps = array_map(
+            function ($route) use (&$routes, &$regexpToAction) {
+                $regexp = '#^'
+                    . preg_replace("/\{(.*?)\}/", '(?<$1>[^/]+?)', $route)
+                    . '$#';
+
+                $regexpToAction[$regexp] = $routes[$route];
+
+                return $regexp;
+            },
+            array_keys($routes),
+        );
+
+        $nonMatches = 0;
+        $matchedRegexp = '';
+        $matches = [];
+        foreach ($regexps as $i => $re) {
+            $route = array_keys($routes)[$i];
+            if (preg_match_all($re, $uri, $matches)) {
+                $matchedRegexp = $re;
+                break;
+            } else {
+                ++$nonMatches;
+            }
+        }
+
+        if ($nonMatches == count($regexps)) {
             return (new Pages)->notFound();
         }
 
-        list($controller, $action) = explode("@", $this->routes[$method][$uri]);
+        list($controller, $action) = explode("@", $regexpToAction[$matchedRegexp]);
 
-        return $this->callAction($controller, $action);
+        $parameters = [];
+        foreach ($matches as $name => $value) {
+            if (gettype($name) != 'integer') {
+                $parameters[$name] = $value[0];
+            }
+        }
+
+        return $this->callAction($controller, $action, $parameters);
     }
 
     /**
      * @throws Exception
      */
     protected
-    function callAction(string $controller, string $action)
+    function callAction(string $controller, string $action, array $parameters = [])
     {
         $controller = new $controller;
 
@@ -58,6 +94,6 @@ class Router
             throw new Exception("{$class} doesn't respond to {$action} action.");
         }
 
-        return $controller->$action();
+        return $controller->$action(...$parameters);
     }
 }

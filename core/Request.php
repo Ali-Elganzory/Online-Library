@@ -13,4 +13,9 @@ class Request
     {
         return $_SERVER['REQUEST_METHOD'];
     }
+
+    public static function payload(string $name)
+    {
+        return $_POST[name];
+    }
 }
