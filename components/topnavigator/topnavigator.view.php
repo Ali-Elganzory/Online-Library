@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Book Search</title>
-    <link rel="stylesheet" href="topnavigator.css">
-</head>
-
-<body>
+<link rel="stylesheet" href="components/topnavigator/topnavigator.css">
 <div class="topnav">
     <a href="#books">Books</a>
     <a href="#favourites">Favourites</a>
@@ -19,13 +11,8 @@
         <input class="icons" type="image" src="../../assets/index.png" alt="Search">
     </div>
 
-    <form action="search_books.php">
-        <input type="search" placeholder="Find Book..." name="book-search" id="bsearch">
+    <form action="/search_results" method="get">
+        <input type="search" placeholder="Find Book..." name="searchtitle" id="bsearch">
         <input type="image" src="../../assets/search-icon-svg-28.png" alt="Search">
     </form>
 </div>
-
-
-</body>
-
-</html>

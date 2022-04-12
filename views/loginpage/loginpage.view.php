@@ -34,7 +34,7 @@
         <input type="button" value="New Account" onclick="openForm('signup')" style="background-color: black; margin-top: 40px;">
         <input type="button" value="Log in" onclick="openForm('signin')" style="background-color: #6C63FF; margin-top: 20px;">
     </div>
-    <form id="signin" action="loginpage.php" name="signin">
+    <form id="signin" action="loginpage.php" name="signin" method="post">
         <fieldset>
             <p>Log In</p>
             <div style="position: absolute; alignment: center; width: 100%">
@@ -51,7 +51,7 @@
             <input type="submit" value="LOGIN" onclick="closeForm('signin')">
         </fieldset>
     </form>
-    <form id="signup" action="loginpage.php" name="signup">
+    <form id="signup" action="loginpage.php" name="signup" method="post">
         <fieldset>
             <p>Create An Account</p>
             <div style="position: absolute; alignment: center; width: 100%">

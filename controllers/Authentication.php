@@ -2,7 +2,9 @@
 
 class Authentication
 {
+    public function register(){
 
+    }
 
 
 }

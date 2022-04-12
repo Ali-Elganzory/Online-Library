@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="booklist.css">
+    <link rel="stylesheet" href="search_results.css">
 </head>
 <body>
-<?php require 'components/topnavigator/topnavigator.view.php';?>
 <div>
+
     <?php foreach ($books as $book):
         require 'components/bookcard/bookcard.view.php';
     endforeach;?>

@@ -8,7 +8,7 @@ class Pages
     {
         $book = Book::find(1);
 
-        return view('book_details', compact('book'));
+        return view('book_details');
     }
 
     public
@@ -17,4 +17,21 @@ class Pages
         return view('not_found');
     }
 
+    public
+    function home()
+    {
+        $books = Book::all();
+
+        return view('mainpage', compact('books'));
+    }
+
+    public
+    function search()
+    {
+        $title=$_GET["searchtitle"];
+        $books = Book::where('title','like',"%{$title}%")
+        ->get();
+
+        return view('search_results', compact('books'));
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
-$router->get('', 'Pages@bookDetails');
+$router->get('', 'Pages@home');
 
 $router->get('book_details', 'Pages@bookDetails');
+
+$router->get('search_results', 'Pages@search');

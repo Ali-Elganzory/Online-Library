@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="bookcard.css">
-</head>
-<body>
+<link rel="stylesheet" href="components/bookcard/bookcard.css">
 <div class="boxes" style="padding: 15px">
     <svg width="210px" height="310px" style="border-radius: 20px;">
         <defs>
@@ -54,9 +49,7 @@
                 ?> </text>
         </g>
 
-        <image xlink:href="<?php echo $book->imageUrl; ?>" clip-path="url(#myImgRect)"/>
+        <image xlink:href="<?php echo $book->image_url; ?>" clip-path="url(#myImgRect)"/>
         <rect class="btn" width="97%" height="97%" rx="20"/>
     </svg>
 </div>
-</body>
-</html>
