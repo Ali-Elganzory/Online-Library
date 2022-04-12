@@ -62,14 +62,13 @@ class QueryBuilder
     /**
      * Fetch a record by its [id] (primary key).
      *
-     * @param string $idColumnName
      * @param string $id
      * @return bool|object
      */
     public
-    function find(string $idColumnName, mixed $id): bool|object
+    function find(mixed $id): bool|object
     {
-        $statement = $this->pdo->prepare("select * from {$this->table} where {$idColumnName} = {$id}");
+        $statement = $this->pdo->prepare("select * from {$this->table} where {$this->modelClass::getIdColumnName()} = {$id}");
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_OBJ);
 
@@ -145,6 +144,93 @@ class QueryBuilder
         }
 
         return $result;
+    }
+
+    public
+    function insert(Model $model): false|Model
+    {
+        $cols = static::getSqlInsertCols($model);
+        $vals = static::getSqlInsertValues($model);
+
+        $query =
+            "INSERT INTO {$this->table} ({$cols}) " .
+            "VALUES ({$vals}) ";
+
+        $statement = $this->pdo->prepare($query . ';');
+        $result = $statement->execute();
+
+        if ($result == false) {
+            return false;
+        }
+
+        return $this->find($this->pdo->lastInsertId());
+    }
+
+    public
+    function update(Model $model): bool
+    {
+        $cols = static::getSqlUpdateColsWithValues($model);
+
+        $query =
+            "UPDATE {$this->table} " .
+            "SET {$cols} " .
+            "WHERE {$model::getIdColumnName()} = {$model->{$model::getIdColumnName()}} ";
+
+        $statement = $this->pdo->prepare($query . ';');
+        return $statement->execute();
+    }
+
+    public
+    function delete(Model $model): bool
+    {
+        $query =
+            "DELETE " .
+            "FROM {$this->table} " .
+            "WHERE {$model::getIdColumnName()} = {$model->{$model::getIdColumnName()}} ";
+
+        $statement = $this->pdo->prepare($query . ';');
+        return $statement->execute();
+    }
+
+
+    private
+    static function getSqlInsertCols(Model $model): string
+    {
+        return join(', ',
+            $model::$columns
+        );
+    }
+
+    private
+    static function getSqlInsertValues(Model $model): string
+    {
+        return join(', ',
+            array_map(
+                fn($k) => static::valueToSqlString($model->{$k}),
+                $model::$columns,
+            ),
+        );
+    }
+
+    private
+    static function getSqlUpdateColsWithValues(Model $model): string
+    {
+        return join(', ',
+            array_map(
+                fn($k) => "{$k} = " . static::valueToSqlString($model->{$k}),
+                $model::$columns,
+            )
+        );
+    }
+
+    private
+    static function valueToSqlString(mixed $v): string
+    {
+        return match (gettype($v)) {
+            'string' => "'" . str_replace("'", "''", $v) . "'",
+            'boolean' => var_export($v, true),
+            default => "{$v}",
+        };
     }
 
     private

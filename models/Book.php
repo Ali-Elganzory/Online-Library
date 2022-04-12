@@ -12,7 +12,16 @@ class Book extends Model
         public string $image_url,
         public int    $views,
         public bool   $favourite = false,
-    ) {
+    )
+    {
     }
+
+    public static array $columns = [
+        'title',
+        'author',
+        'description',
+        'image_url',
+        'views',
+    ];
 
 }

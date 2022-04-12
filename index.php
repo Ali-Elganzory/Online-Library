@@ -1,6 +1,6 @@
 <?php
 
-// Autoloading.
+// Autoload.
 require_once 'vendor/autoload.php';
 
 
@@ -17,14 +17,20 @@ require Router::load('routes.php')
 
 
 /**
- *
+ *-----------
  * Examples
- *
+ *-----------
  *
  * [Database]
  *
  * Book::all();
  * Book::find(2);
  * Book::where('views', '>=', '5')->limit(2)->get();
+ *
+ * $book->title = 'Hakuna Matata';
+ * $book->update();
+ * $book->delete();
+ *
+ * $book->insert();
  *
  */
