@@ -5,10 +5,10 @@
     <a class="active" href="#favourites">Find Book</a>
 
     <div style="width: 30px; height: 30px;float: right; padding: 5px">
-        <input class="icons" type="image" src="../../assets/png-clipart-computer-icons-hamburger-button-dots-kebab-menu-text-rectangle-thumbnail.png" alt="Search">
+        <input class="icons" type="image" src="../../../assets/png-clipart-computer-icons-hamburger-button-dots-kebab-menu-text-rectangle-thumbnail.png" alt="Search">
     </div>
     <div style="width: 30px; height: 30px;float: right; padding: 5px">
-        <input class="icons" type="image" src="../../assets/index.png" alt="Search">
+        <input class="icons" type="image" src="../../../assets/index.png" alt="Search">
     </div>
 
     <form action="/search_results" method="get">

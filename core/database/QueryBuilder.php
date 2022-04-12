@@ -113,7 +113,7 @@ class QueryBuilder
     }
 
     public
-    function where(string $column, string $operator, mixed $value = null): QueryBuilder
+    function where(string $column, string $operator, mixed $value): QueryBuilder
     {
         $value = gettype($value) == 'string' ? "'" . $value . "'" : $value;
         $this->_whereClauses[] = "{$column} {$operator} {$value}";
@@ -134,37 +134,7 @@ class QueryBuilder
     public
     function get(): bool|array
     {
-        $query = "";
-
-        // SELECT
-        if (!empty($this->_select)) {
-            $query = $this->_select . " ";
-        } else {
-            $query =
-                "SELECT * ";
-        }
-
-        // FROM
-        $query = $query .
-            "FROM " . $this->table . " ";
-
-        // JOIN
-        if (!empty($this->_joins)) {
-            $query = $query .
-                join(" ", $this->_joins) . " ";
-        }
-
-        // WHERE
-        if (!empty($this->_whereClauses)) {
-            $query = $query .
-                "WHERE " . join(", ", $this->_whereClauses) . " ";
-        }
-
-        // LIMIT
-        if ($this->_limit > 0) {
-            $query = $query .
-                "LIMIT " . $this->_limit . " ";
-        }
+        $query = $this->buildQuery();
 
         $statement = $this->pdo->prepare($query . ';');
         $statement->execute();
@@ -230,6 +200,18 @@ class QueryBuilder
         return $statement->execute();
     }
 
+    public
+    function exists(): bool
+    {
+        $this->_limit = 1;
+        $query = $this->buildQuery();
+
+        $statement = $this->pdo->prepare("SELECT EXISTS( {$query} )" . ';');
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result[array_key_first($result)];
+    }
 
     private
     static function getSqlInsertCols(Model $model): string
@@ -275,6 +257,44 @@ class QueryBuilder
     function error(string $msg)
     {
         throw new Exception("[QueryBuilder] :: {$msg}");
+    }
+
+    protected
+    function buildQuery(): string
+    {
+        $query = "";
+
+        // SELECT
+        if (!empty($this->_select)) {
+            $query = $this->_select . " ";
+        } else {
+            $query =
+                "SELECT * ";
+        }
+
+        // FROM
+        $query = $query .
+            "FROM " . $this->table . " ";
+
+        // JOIN
+        if (!empty($this->_joins)) {
+            $query = $query .
+                join(" ", $this->_joins) . " ";
+        }
+
+        // WHERE
+        if (!empty($this->_whereClauses)) {
+            $query = $query .
+                "WHERE " . join(", ", $this->_whereClauses) . " ";
+        }
+
+        // LIMIT
+        if ($this->_limit > 0) {
+            $query = $query .
+                "LIMIT " . $this->_limit . " ";
+        }
+
+        return $query;
     }
 
 }

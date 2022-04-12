@@ -74,6 +74,14 @@ class Model
     }
 
     public
+    static function exists(string $id): bool
+    {
+        return static::getQueryBuilder()
+            ->where(static::primaryKey, '=', $id)
+            ->exists();
+    }
+
+    public
     static function all(): bool|array
     {
         return static::getQueryBuilder()->all();

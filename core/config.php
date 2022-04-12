@@ -9,5 +9,13 @@ return [
         'options' => [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
         ],
-    ]
+    ],
+    'authentication' => [
+        'JWTHeader' => [
+            'alg' => 'HS256',
+            'typ' => 'JWT',
+        ],
+        'exp' => 1000,
+        'privateKey' => '123456',
+    ],
 ];

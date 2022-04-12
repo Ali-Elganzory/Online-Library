@@ -5,6 +5,7 @@
     ]
   },
   "require": {
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "nowakowskir/php-jwt": "^2.0"
   }
 }

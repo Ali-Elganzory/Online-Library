@@ -4,10 +4,10 @@
     <link rel="stylesheet" href="booklist.css">
 </head>
 <body>
-<?php require 'components/topnavigator/topnavigator.view.php';?>
+<?php require 'partials/topnavigator.view.php';?>
 <div>
     <?php foreach ($books as $book):
-        require 'components/bookcard/bookcard.view.php';
+        require 'partials/bookcard/bookcard.view.php';
     endforeach;?>
 </div>
 </body>

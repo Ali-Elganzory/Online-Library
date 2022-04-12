@@ -6,4 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Nowakowskir\\JWT\\' => array($vendorDir . '/nowakowskir/php-jwt/src'),
 );
