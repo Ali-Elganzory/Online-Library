@@ -1,6 +1,9 @@
 <?php
 
 
+require_once 'helpers.php';
+
+
 App::bind("config", require 'config.php');
 
 

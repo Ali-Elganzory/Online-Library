@@ -9,7 +9,7 @@ require_once 'core/bootstrap.php';
 
 
 // Direct request.
-require Router::load('routes.php')
+Router::load('routes.php')
     ->direct(
         Request::uri(),
         Request::method()

@@ -28,6 +28,8 @@ class Model
     /**
      * The columns of the table except the primary key (i.e., id).
      *
+     * By default, all public properties are used.
+     *
      * @var array|null
      */
     protected static ?array $columns;
@@ -59,7 +61,7 @@ class Model
         return static::$columns;
     }
 
-    public
+    protected
     static function getQueryBuilder(): QueryBuilder
     {
         return QueryBuilder::model(static::class);

@@ -3,13 +3,13 @@
 class Router
 {
 
-    protected string $not_found_route = 'controllers/404.php';
     protected array $routes = [
         "GET" => [],
         "POST" => [],
     ];
 
-    public static function load(string $routes): Router
+    public
+    static function load(string $routes): Router
     {
         $router = new static;
 
@@ -18,21 +18,46 @@ class Router
         return $router;
     }
 
-    public function get(string $uri, string $controller): void
+    public
+    function get(string $uri, string $controller): void
     {
         $this->routes["GET"][$uri] = $controller;
     }
 
-    public function post(string $uri, string $controller): void
+    public
+    function post(string $uri, string $controller): void
     {
         $this->routes["POST"][$uri] = $controller;
     }
 
-    public function direct(string $uri, string $method): string
+    /**
+     * @throws Exception
+     */
+    public
+    function direct(string $uri, string $method)
     {
         if (!array_key_exists($uri, $this->routes[$method])) {
-            return $this->not_found_route;
+            return (new Pages)->notFound();
         }
-        return $this->routes[$method][$uri];
+
+        list($controller, $action) = explode("@", $this->routes[$method][$uri]);
+
+        return $this->callAction($controller, $action);
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected
+    function callAction(string $controller, string $action)
+    {
+        $controller = new $controller;
+
+        if (!method_exists($controller, $action)) {
+            $class = $controller::class;
+            throw new Exception("{$class} doesn't respond to {$action} action.");
+        }
+
+        return $controller->$action();
     }
 }
