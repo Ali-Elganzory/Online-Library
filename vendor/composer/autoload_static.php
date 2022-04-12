@@ -6,6 +6,20 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit9a7861acf7bb7a8188575aaa25489b52
 {
+    public static $prefixLengthsPsr4 = array (
+        'N' => 
+        array (
+            'Nowakowskir\\JWT\\' => 16,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Nowakowskir\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nowakowskir/php-jwt/src',
+        ),
+    );
+
     public static $classMap = array (
         'App' => __DIR__ . '/../..' . '/core/App.php',
         'Authentication' => __DIR__ . '/../..' . '/controllers/Authentication.php',
@@ -16,10 +30,29 @@ class ComposerStaticInit9a7861acf7bb7a8188575aaa25489b52
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Connection' => __DIR__ . '/../..' . '/core/database/Connection.php',
         'Model' => __DIR__ . '/../..' . '/core/database/Model.php',
+        'Nowakowskir\\JWT\\Base64Url' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Base64Url.php',
+        'Nowakowskir\\JWT\\Exceptions\\AlgorithmMismatchException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/AlgorithmMismatchException.php',
+        'Nowakowskir\\JWT\\Exceptions\\EmptyTokenException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/EmptyTokenException.php',
+        'Nowakowskir\\JWT\\Exceptions\\InsecureTokenException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/InsecureTokenException.php',
+        'Nowakowskir\\JWT\\Exceptions\\IntegrityViolationException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/IntegrityViolationException.php',
+        'Nowakowskir\\JWT\\Exceptions\\InvalidClaimTypeException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/InvalidClaimTypeException.php',
+        'Nowakowskir\\JWT\\Exceptions\\InvalidStructureException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/InvalidStructureException.php',
+        'Nowakowskir\\JWT\\Exceptions\\SigningFailedException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/SigningFailedException.php',
+        'Nowakowskir\\JWT\\Exceptions\\TokenExpiredException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/TokenExpiredException.php',
+        'Nowakowskir\\JWT\\Exceptions\\TokenInactiveException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/TokenInactiveException.php',
+        'Nowakowskir\\JWT\\Exceptions\\UndefinedAlgorithmException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/UndefinedAlgorithmException.php',
+        'Nowakowskir\\JWT\\Exceptions\\UnsupportedAlgorithmException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/UnsupportedAlgorithmException.php',
+        'Nowakowskir\\JWT\\Exceptions\\UnsupportedTokenTypeException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/UnsupportedTokenTypeException.php',
+        'Nowakowskir\\JWT\\JWT' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/JWT.php',
+        'Nowakowskir\\JWT\\TokenDecoded' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/TokenDecoded.php',
+        'Nowakowskir\\JWT\\TokenEncoded' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/TokenEncoded.php',
+        'Nowakowskir\\JWT\\Validation' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Validation.php',
         'Pages' => __DIR__ . '/../..' . '/controllers/Pages.php',
         'QueryBuilder' => __DIR__ . '/../..' . '/core/database/QueryBuilder.php',
         'Request' => __DIR__ . '/../..' . '/core/Request.php',
         'Router' => __DIR__ . '/../..' . '/core/Router.php',
+        'Tests\\TokenBaseTest' => __DIR__ . '/..' . '/nowakowskir/php-jwt/tests/TokenBaseTest.php',
+        'Tests\\TokenEncodedTest' => __DIR__ . '/..' . '/nowakowskir/php-jwt/tests/TokenTest.php',
         'User' => __DIR__ . '/../..' . '/models/User.php',
         'UserFavourite' => __DIR__ . '/../..' . '/models/UserFavourite.php',
     );
@@ -27,6 +60,8 @@ class ComposerStaticInit9a7861acf7bb7a8188575aaa25489b52
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9a7861acf7bb7a8188575aaa25489b52::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9a7861acf7bb7a8188575aaa25489b52::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit9a7861acf7bb7a8188575aaa25489b52::$classMap;
 
         }, null, ClassLoader::class);
