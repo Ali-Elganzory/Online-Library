@@ -15,11 +15,15 @@ function redirect(string $path)
 
 function json(mixed $data): bool|string
 {
-    return json_encode(match (gettype($data)) {
+    $encoded = json_encode(match (gettype($data)) {
         'array', 'string' => $data,
         'boolean' => var_export($data, true),
         default => (array)$data,
     });
+
+    echo $encoded;
+
+    return $encoded;
 }
 
 function dd(mixed $data)
