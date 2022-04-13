@@ -18,9 +18,11 @@ class Authentication
     }
 
     public
-    function register(){
+    function register()
+    {
         $username = $_POST['newusername'] ?? "";
         $password = $_POST['newpassword'] ?? "";
+
         if (User::where('username', '=', $username)->exists()) {
             return json([
                 'succeeded' => false,

@@ -1,9 +1,21 @@
 <link rel="stylesheet" href="views/partials/bookcard/bookcard.css">
-<div class="boxes" style="padding: 15px">
+<script>
+    function fav(id){
+        let heart = document.getElementById(id);
+        if(heart.style.fill==="red"){
+            heart.style.fill = "white";
+            heart.style.stroke = "gray";
+        } else {
+            heart.style.fill = "red";
+            heart.style.stroke = "white";
+        }
+    }
+</script>
+<div class="boxes">
     <svg width="210px" height="310px" style="border-radius: 20px;">
         <defs>
             <filter id="text-filter" x="0" y="0" width="110%" height="110%">
-                <feOffset result="offOut" in="SourceGraphic" dx="2" dy="2" />
+                <feOffset result="offOut" in="SourceGraphic" dx="3" dy="3" />
                 <feGaussianBlur result="blurOut" in="offOut" stdDeviation="5" />
                 <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
             </filter>
@@ -49,7 +61,8 @@
                 ?> </text>
         </g>
 
-        <image xlink:href="<?php echo $book->image_url; ?>" clip-path="url(#myImgRect)"/>
-        <rect class="btn" width="97%" height="97%" rx="20"/>
+        <image xlink:href="<?php echo $book->image_url; ?>" clip-path="url(#myImgRect)"  "/>
+        <rect onclick="location.href='/book_details/<?= $book->id ?>'" class="btn" width="97%" height="97%" rx="20"/>
     </svg>
+    <svg onclick="fav('<?=$book->id?>')" class="heart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37.255" height="35.9" viewBox="0 0 37.255 35.9"><defs><style>.a{clip-path:url(#a);}.b{fill:white;stroke: gray;}</style><clipPath id="a"><path d="M0-47.5H37.255v35.9H0Z" transform="translate(0 47.5)"/></clipPath></defs><g transform="translate(0 47.5)"><g transform="translate(0 -47.5)"><g class="a"><g transform="translate(3.007 3.907)"><path class="b" id="<?=$book->id?>" d="M0-2.5c0-8.313,11.945-11.393,15.621-1.77C19.3-13.892,31.242-10.811,31.242-2.5c0,9.032-15.621,20.483-15.621,20.483S0,6.533,0-2.5" transform="translate(0 10.23)"/></g></g></g></g></svg>
 </div>

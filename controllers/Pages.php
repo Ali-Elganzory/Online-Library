@@ -8,7 +8,7 @@ class Pages
     {
         $book = Book::find($id);
 
-        return view('book_details');
+        return view('book_details', compact('book'));
     }
 
     public

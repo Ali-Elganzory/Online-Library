@@ -8,4 +8,4 @@ $router->get('search_results', 'Pages@search');
 
 $router->post('api/login', 'Authentication@login');
 
-$router->get('api/register', 'Authentication@register');
+$router->post('api/register', 'Authentication@register');

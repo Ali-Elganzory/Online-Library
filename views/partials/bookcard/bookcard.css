@@ -1,6 +1,6 @@
 image{
     height: 100%;
-    width: 120%;
+    width: 100%;
 }
 
 .book-title{
@@ -13,11 +13,13 @@ image{
 }
 
 .boxes {
-
-    display: inline-block;
+    padding: 15px;
+    display: inline-table;
+    float: left;
 }
 
 rect.btn {
+    z-index: 2;
     stroke:#fff;
     fill:#fff;
     fill-opacity:0;
@@ -28,4 +30,17 @@ rect.btn:hover {
     fill: aqua;
     fill-opacity: 0.1;
     animation: backwards;
+}
+
+.heart{
+    z-index: 3;
+    display: inline-block;
+    position: relative;
+    right: 50px;
+    bottom: 85px;
+}
+
+.b:hover{
+    fill: red;
+    stroke: white;
 }
