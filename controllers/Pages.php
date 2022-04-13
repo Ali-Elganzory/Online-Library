@@ -34,4 +34,10 @@ class Pages
 
         return view('search_results', compact('books'));
     }
+
+    public
+    function login()
+    {
+        return view('loginpage');
+    }
 }

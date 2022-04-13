@@ -2,9 +2,12 @@
 <html>
 <head>
     <title>Log In</title>
-    <link rel="stylesheet" href="loginpage.css">
+    <script src="views/loginpage/login.js">
+    </script>
+    <link rel="stylesheet" href="views/loginpage/loginpage.css">
 </head>
 <body>
+
     <script>
         let active = "";
         function openForm(id) {
@@ -34,7 +37,7 @@
         <input type="button" value="New Account" onclick="openForm('signup')" style="background-color: black; margin-top: 40px;">
         <input type="button" value="Log in" onclick="openForm('signin')" style="background-color: #6C63FF; margin-top: 20px;">
     </div>
-    <form id="signin" action="loginpage.php" name="signin" method="post">
+    <form id="signin" name="signin">
         <fieldset>
             <p>Log In</p>
             <div style="position: absolute; alignment: center; width: 100%">
@@ -48,7 +51,7 @@
                 </div>
             </div>
             <br>
-            <input type="submit" value="LOGIN" onclick="closeForm('signin')">
+            <input id="signin-btn" name="signin" type="submit" value="LOGIN">
         </fieldset>
     </form>
     <form id="signup" action="loginpage.php" name="signup" method="post">
@@ -64,7 +67,7 @@
                     <input class="forminput" type="password" id="npass" name="newpassword" placeholder="Password">
                 </div>
             </div>
-            <input type="submit" value="Register" onclick="closeForm('signup')">
+            <input name="register" type="submit" value="Register" onclick="closeForm('signup')">
 
         </fieldset>
 

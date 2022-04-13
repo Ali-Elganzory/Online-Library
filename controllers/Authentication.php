@@ -37,6 +37,7 @@ class Authentication
         $tokenEncoded = (
             new TokenDecoded(
                 payload: [
+
                     'admin'=> false,
                     'exp' => time() + $this->exp
                 ],
@@ -54,6 +55,13 @@ class Authentication
     {
         $username = $_POST['username'] ?? "";
         $password = $_POST['password'] ?? "";
+        dd(
+            $_POST
+        );
+
+        dd(
+           $username.' '.$password
+        );
 
         if (!User::where('username', '=', $username)->exists()) {
             return json([
