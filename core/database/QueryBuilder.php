@@ -115,7 +115,7 @@ class QueryBuilder
     public
     function where(string $column, string $operator, mixed $value): QueryBuilder
     {
-        $value = gettype($value) == 'string' ? "'" . $value . "'" : $value;
+        $value = gettype($value) == 'string' ? "'{$value}'" : $value;
         $this->_whereClauses[] = "{$column} {$operator} {$value}";
         return $this;
     }
@@ -191,10 +191,11 @@ class QueryBuilder
     public
     function delete(Model $model): bool
     {
+        $primaryKey = $model::primaryKey;
         $query =
             "DELETE " .
             "FROM {$this->table} " .
-            "WHERE {$model::getPrimaryKey()} = {$model->{$model::getPrimaryKey()}} ";
+            "WHERE {$primaryKey} = {$model->{$primaryKey}} ";
 
         $statement = $this->pdo->prepare($query . ';');
         return $statement->execute();
@@ -285,7 +286,7 @@ class QueryBuilder
         // WHERE
         if (!empty($this->_whereClauses)) {
             $query = $query .
-                "WHERE " . join(", ", $this->_whereClauses) . " ";
+                "WHERE " . join(" AND ", $this->_whereClauses) . " ";
         }
 
         // LIMIT

@@ -21,4 +21,20 @@ class User extends Model
             ->get();
     }
 
+    public function toggleFavourite(mixed $bookId): bool
+    {
+        $isFavourite = UserFavourite::where('user_id', '=', $this->id)
+            ->where('book_id', '=', $bookId)
+            ->exists();
+
+        if ($isFavourite) {
+            return UserFavourite::where('user_id', '=', $this->id)
+                ->where('book_id', '=', $bookId)
+                ->get()[0]
+                ->delete();
+        }
+
+        return (new UserFavourite(0, $this->id, $bookId))->insert();
+    }
+
 }

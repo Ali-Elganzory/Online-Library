@@ -30,12 +30,12 @@ class Authentication
             ]);
         }
 
-        $user = new User(0,$username,$password,'');
+        $user = new User(0, $username, $password, '');
 
         $user->insert();
 
         $tokenEncoded = (
-            new TokenDecoded(
+                new TokenDecoded(
                 payload: [
 
                     'admin'=> false,
@@ -45,8 +45,8 @@ class Authentication
             ))->encode($this->privateKey, JWT::ALGORITHM_HS256);
 
         return json([
-            'succeeded'=>true,
-            'token'=>$tokenEncoded->toString()]);
+            'succeeded' => true,
+            'token' => $tokenEncoded->toString()]);
 
     }
 
@@ -83,6 +83,7 @@ class Authentication
         $tokenEncoded = (new TokenDecoded(
             payload: [
                 'admin' => false,
+                'user_id' => $user->id,
                 'exp' => time() + $this->exp,
             ],
             header: $this->JWTHeader,

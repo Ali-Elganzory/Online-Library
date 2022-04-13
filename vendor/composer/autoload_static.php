@@ -29,6 +29,7 @@ class ComposerStaticInit9a7861acf7bb7a8188575aaa25489b52
         'Composer\\Autoload\\ComposerStaticInit9a7861acf7bb7a8188575aaa25489b52' => __DIR__ . '/..' . '/composer/autoload_static.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Connection' => __DIR__ . '/../..' . '/core/database/Connection.php',
+        'Favourites' => __DIR__ . '/../..' . '/controllers/Favourites.php',
         'Model' => __DIR__ . '/../..' . '/core/database/Model.php',
         'Nowakowskir\\JWT\\Base64Url' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Base64Url.php',
         'Nowakowskir\\JWT\\Exceptions\\AlgorithmMismatchException' => __DIR__ . '/..' . '/nowakowskir/php-jwt/src/Exceptions/AlgorithmMismatchException.php',
