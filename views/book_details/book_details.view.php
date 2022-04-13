@@ -10,6 +10,8 @@
     <title><?= $book->title ?></title>
 
     <link rel="stylesheet" href="/views/book_details/book_details.css">
+    <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="application/javascript" src="/views/book_details/book_details.js"></script>
 
 </head>
 
@@ -20,13 +22,52 @@
     <div class="height-max width-max row cross-stretch">
 
         <!-- Reviews column -->
-        <div class="bg-primary-color flex-3">
+        <div class="bg-primary flex-3 column cross-center">
+
+            <div class="mt-2 mb-1 text-md text-white">Your voice shall be heard</div>
+
+            <div class="rounded-1 w-20 mb-1 p-1 bg-light-primary">
+                <div class="column">
+                    <div class="row">
+                        <div class="flex-1"></div>
+                        <div>
+                            <?php foreach ([1, 2, 3, 4] as $i): ?>
+                                <svg class="pr-0-5" xmlns="http://www.w3.org/2000/svg" width="22.615" height="25.474"
+                                     viewBox="0 0 26.615 25.474">
+                                    <path id="Icon_awesome-star" data-name="Icon awesome-star"
+                                          d="M13.321.885,10.073,7.472,2.8,8.532a1.593,1.593,0,0,0-.881,2.716l5.258,5.124L5.939,23.61a1.591,1.591,0,0,0,2.308,1.677l6.5-3.418,6.5,3.418A1.592,1.592,0,0,0,23.56,23.61l-1.244-7.238,5.258-5.124a1.593,1.593,0,0,0-.881-2.716l-7.268-1.06L16.177.885a1.593,1.593,0,0,0-2.856,0Z"
+                                          transform="translate(-1.441 0.001)" fill="#ffc02d"/>
+                                </svg>
+                            <?php endforeach; ?>
+                            <?php foreach ([5] as $i): ?>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22.583" height="24.231"
+                                     viewBox="0 0 30.583 29.231">
+                                    <path id="Icon_feather-star" data-name="Icon feather-star"
+                                          d="M16.791,3l4.262,8.633,9.53,1.393-6.9,6.716,1.627,9.488-8.523-4.482L8.268,29.231,9.9,19.743,3,13.026l9.53-1.393Z"
+                                          transform="translate(-1.5 -1.5)" fill="none" stroke="#ffc02d"
+                                          stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                </svg>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="flex-1"></div>
+                    </div>
+
+                    <textarea placeholder="What do you think?" rows="4" class="p-1 mv-1 text-sm rounded-0-5 bg-white no-resize border-0 text-color"></textarea>
+
+                    <button class="h-3 rounded-0-5 border-0 bg-primary elevation-1 text-white">review</button>
+                </div>
+            </div>
+
+            <?php require 'views/partials/review_card/review_card.view.php' ?>
+            <?php require 'views/partials/review_card/review_card.view.php' ?>
+            <?php require 'views/partials/review_card/review_card.view.php' ?>
 
         </div>
 
         <!-- Book details -->
         <div class="flex-7">
-            <div class="column cross-stretch ph-6">
+
+            <div class="column cross-stretch ph-6 mt-1">
                 <div class="row cross-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                          viewBox="0 0 50.483 50.483">
@@ -63,8 +104,20 @@
                         </svg>
                     </div>
                 </div>
-                <h3 class="pt-2">Description</h3>
-                <p><?= $book->description ?></p>
+
+                <div class="h-2"></div>
+
+                <div class="flex-1 row">
+                    <div>
+                        <img class="w-16 box-fit-cover rounded-2" src=<?= $book->image_url ?> alt="">
+                    </div>
+                    <div class="w-2"></div>
+                    <div class="flex-1 cross-start column">
+                        <p class="m-0 text-md text-color text-bold">Description</p>
+                        <p><?= $book->description ?></p>
+                    </div>
+                </div>
+
             </div>
         </div>
 
