@@ -16,28 +16,25 @@
 <body>
 
 <div id="book_details_page">
-    <div class="height-max width-max row cross-stretch">
-        <div class="bg-primary-color flex-4">
-            <svg class="mt-4 ml-4" xmlns="http://www.w3.org/2000/svg" width="50.483" height="50.483"
-                 viewBox="0 0 50.483 50.483">
-                <path id="Icon_awesome-arrow-alt-circle-left" data-name="Icon awesome-arrow-alt-circle-left"
-                      d="M25.8,51.045A25.241,25.241,0,1,1,51.045,25.8,25.237,25.237,0,0,1,25.8,51.045ZM37.61,21.326H25.8V14.109a1.222,1.222,0,0,0-2.086-.865L12.084,24.939a1.21,1.21,0,0,0,0,1.72L23.717,38.353a1.221,1.221,0,0,0,2.086-.865V30.282H37.61a1.225,1.225,0,0,0,1.221-1.221V22.547A1.225,1.225,0,0,0,37.61,21.326Z"
-                      transform="translate(-0.563 -0.563)" fill="#fff"/>
-            </svg>
-        </div>
-        <div class="flex-7"></div>
-    </div>
 
-    <div class="absolute height-max-finite width-max row cross-stretch mv-6">
-        <div class="flex-1"></div>
-        <div class="flex-3">
-            <img class="width-max height-max box-fit-cover" style="width: 100%"
-                 src="<?= $book->image_url ?>"
-                 alt="Sorry, no cover at the time 😊.">
+    <div class="height-max width-max row cross-stretch">
+
+        <!-- Reviews column -->
+        <div class="bg-primary-color flex-3">
+
         </div>
-        <div class="flex-6">
+
+        <!-- Book details -->
+        <div class="flex-7">
             <div class="column cross-stretch ph-6">
                 <div class="row cross-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                         viewBox="0 0 50.483 50.483">
+                        <path id="Icon_awesome-arrow-alt-circle-left" data-name="Icon awesome-arrow-alt-circle-left"
+                              d="M25.8,51.045A25.241,25.241,0,1,1,51.045,25.8,25.237,25.237,0,0,1,25.8,51.045ZM37.61,21.326H25.8V14.109a1.222,1.222,0,0,0-2.086-.865L12.084,24.939a1.21,1.21,0,0,0,0,1.72L23.717,38.353a1.221,1.221,0,0,0,2.086-.865V30.282H37.61a1.225,1.225,0,0,0,1.221-1.221V22.547A1.225,1.225,0,0,0,37.61,21.326Z"
+                              transform="translate(-0.563 -0.563)" fill="#6C63FF"/>
+                    </svg>
+                    <div class="w-4"></div>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="31.5" height="36" viewBox="0 0 31.5 36">
                             <path id="Icon_awesome-share-alt" data-name="Icon awesome-share-alt"
@@ -45,15 +42,16 @@
                                   fill="#6c63ff"/>
                         </svg>
                     </div>
-                    <div class="w-4 content-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="2" height="40" viewBox="0 0 2 40">
+                    <div class="w-2 content-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5" height="40" viewBox="0 0 1.5 40">
                             <line id="Line_4" data-name="Line 4" y2="40" transform="translate(1)" fill="none"
                                   stroke="#707070" stroke-width="2"/>
                         </svg>
                     </div>
                     <div class="text-center">
-                        <p>views</p>
-                        <p><?= $book->views ?></p>
+                        views
+                        <br>
+                        <?= $book->views ?>
                     </div>
                     <h1 class="flex-1 content-center"><?= $book->title ?></h1>
                     <div>
@@ -69,7 +67,9 @@
                 <p><?= $book->description ?></p>
             </div>
         </div>
+
     </div>
+
 
 </div>
 

@@ -161,6 +161,10 @@ html, body {
     margin-bottom: 6em;
 }
 
+.w-1 {
+    width: 1em;
+}
+
 .w-2 {
     width: 2em;
 }
