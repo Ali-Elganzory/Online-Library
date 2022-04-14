@@ -10,7 +10,8 @@
     <title><?= $book->title ?></title>
 
     <link rel="stylesheet" href="/views/book_details/book_details.css">
-    <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="application/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="application/javascript" src="/views/book_details/book_details.js"></script>
 
 </head>
@@ -52,7 +53,8 @@
                         <div class="flex-1"></div>
                     </div>
 
-                    <textarea placeholder="What do you think?" rows="4" class="p-1 mv-1 text-sm rounded-0-5 bg-white no-resize border-0 text-color"></textarea>
+                    <textarea placeholder="What do you think?" rows="4"
+                              class="p-1 mv-1 text-sm rounded-0-5 bg-white no-resize border-0 text-color"></textarea>
 
                     <button class="h-3 rounded-0-5 border-0 bg-primary elevation-1 text-white">review</button>
                 </div>
@@ -95,12 +97,19 @@
                         <?= $book->views ?>
                     </div>
                     <h1 class="flex-1 content-center"><?= $book->title ?></h1>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40.944" height="39.369"
+                    <div id="favourite-btn" class="animate-icon-btn <?php $book->isFavourite() ?>">
+                        <svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="40.944"
+                             height="39.369"
                              viewBox="0 0 40.944 39.369">
                             <path id="Icon_ionic-ios-heart" data-name="Icon ionic-ios-heart"
                                   d="M33.3,3.937h-.1a11.2,11.2,0,0,0-9.35,5.118A11.2,11.2,0,0,0,14.5,3.937h-.1A11.128,11.128,0,0,0,3.375,15.059,23.958,23.958,0,0,0,8.08,28.12C14,36.22,23.847,43.306,23.847,43.306S33.689,36.22,39.614,28.12a23.958,23.958,0,0,0,4.7-13.061A11.128,11.128,0,0,0,33.3,3.937Z"
                                   transform="translate(-3.375 -3.938)" fill="#fe7676"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="44.006" height="42.314"
+                             viewBox="0 0 44.006 42.314">
+                            <path id="Icon_ionic-ios-heart-empty" data-name="Icon ionic-ios-heart-empty"
+                                  d="M35.533,3.938h-.106a12.036,12.036,0,0,0-10.049,5.5,12.036,12.036,0,0,0-10.049-5.5h-.106A11.96,11.96,0,0,0,3.375,15.891c0,3.914,1.714,9.468,5.056,14.038C14.8,38.635,25.378,46.251,25.378,46.251s10.578-7.616,16.947-16.322c3.343-4.57,5.056-10.124,5.056-14.038A11.96,11.96,0,0,0,35.533,3.938Zm4.4,24.246C35.428,34.35,28.562,40.042,25.378,42.528c-3.184-2.486-10.049-8.188-14.556-14.355A22.821,22.821,0,0,1,6.337,15.891,8.975,8.975,0,0,1,15.244,6.91h.1a8.869,8.869,0,0,1,4.348,1.142A9.243,9.243,0,0,1,22.9,11.067a2.972,2.972,0,0,0,4.972,0A9.336,9.336,0,0,1,31.09,8.052,8.869,8.869,0,0,1,35.438,6.91h.1a8.975,8.975,0,0,1,8.907,8.981A23.11,23.11,0,0,1,39.934,28.183Z"
+                                  transform="translate(-3.375 -3.938)" fill="#777"/>
                         </svg>
                     </div>
                 </div>

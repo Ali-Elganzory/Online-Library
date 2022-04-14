@@ -1,15 +1,12 @@
 <?php
 
+// Pages
 $router->get('', 'Pages@home');
-
+$router->get('login', 'Pages@login');
+$router->get('search_results', 'Pages@search');
 $router->get('book_details/{id}', 'Pages@bookDetails');
 
-$router->get('search_results', 'Pages@search');
-
+// API
 $router->post('api/login', 'Authentication@login');
-
 $router->post('api/register', 'Authentication@register');
-
-$router->get('login', 'Pages@login');
-
-$router->post('api/toggle_favourites', 'Favourites@toggleFavourite');
+$router->post('api/toggle_favourite', 'Favourites@toggleFavourite');

@@ -36,13 +36,13 @@ class Router
     public
     function direct(string $uri, string $method)
     {
-        if (in_array($uri, ['login', 'register'])) {
-            if (!$this->authenticate()) {
-                return json(
-                    "Sorry this user is not permitted access." .
-                    " Please login or register an account",
-                );
+        if (!in_array($uri, ['login', 'register', 'api/login', 'api/register'])) {
+            $token = Request::token();
+            if (!$token) {
+                redirect("/login");
             }
+
+            Authentication::authenticate($token);
         }
 
         $routes = $this->routes[$method];
@@ -106,12 +106,4 @@ class Router
         return $controller->$action(...$parameters);
     }
 
-    public
-    function authenticate(): bool
-    {
-        ##if (Request::header('Autherization')) {
-
-        ##}
-        return true;
-    }
 }
