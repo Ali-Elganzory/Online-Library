@@ -104,7 +104,11 @@ html, body {
     flex: 8;
 }
 
-.absolute {
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
     position: absolute;
     top: 0;
     left: 0;
@@ -369,4 +373,42 @@ html, body {
 
 .elevation-1 {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 16%);
+}
+
+
+/*
+    Animation
+ */
+
+/* icon button */
+.animate-icon-btn {
+    cursor: pointer;
+    display: grid;
+}
+
+.animate-icon-btn > .active-icon,
+.animate-icon-btn > :not(.active-icon) {
+    transition: all .35s ease-in-out;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.animate-icon-btn.active > .active-icon {
+    transform: rotate(90deg) scale(0);
+    opacity: 0;
+}
+
+.animate-icon-btn:not(.active) > :not(.active-icon) {
+    transform: rotate(-90deg) scale(0);
+    opacity: 0;
+}
+
+/***************/
+
+/*
+    Hover
+ */
+
+.cursor-pointer {
+    cursor: pointer;
 }

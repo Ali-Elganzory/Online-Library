@@ -2,6 +2,8 @@
 
 class Request
 {
+    public
+    static User $user;
 
     public
     static function uri(): string
@@ -19,12 +21,32 @@ class Request
     public
     static function header(string $name)
     {
-        return $_SERVER[$name];
+        return $_SERVER[strtoupper("HTTP_{$name}")];
     }
 
     public
     static function payload()
     {
-        return file_get_contents('php://input');
+        return json_decode(file_get_contents('php://input'));
+    }
+
+    public
+    static function token(): false|string
+    {
+        $uri = static::uri();
+
+        // API
+        if (str_starts_with($uri, 'api/')) {
+            $authHeader = Request::header('Authorization');
+
+            if ($authHeader == null) {
+                return false;
+            }
+
+            return preg_split("/^( *bearer +)/i", $authHeader)[1] ?? false;
+        }
+
+        // Pages
+        return $_COOKIE["token"] ?? false;
     }
 }

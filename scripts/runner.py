@@ -42,7 +42,7 @@ def main():
 
         # watch files
         event_handler = FileChangedEventHandler(driver=driver,
-                                                regexes=[r".*\.php$", r".*\.css$"])
+                                                regexes=[r".*\.php$", r".*\.css$", r".*\.js$"])
         observer = Observer()
         observer.schedule(event_handler, path='.', recursive=True)
         observer.start()

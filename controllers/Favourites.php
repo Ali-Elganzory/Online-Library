@@ -4,19 +4,19 @@ class Favourites
 {
 
     public
-    function toggleFavourite()
+    function toggleFavourite(): bool|string
     {
-        $userId = 2;
-        $bookId = 2;
+        $payload = Request::payload();
+        $bookId = $payload->book_id;
 
-        $result = User::find($userId)->toggleFavourite($bookId);
+        $result = User::find(Authentication::$user->id)->toggleFavourite($bookId);
 
         $data =
             [
                 'succeeded' => $result
             ];
 
-        return json($data);
+        return json($data, $result ? 200 : 500);
     }
 
 }

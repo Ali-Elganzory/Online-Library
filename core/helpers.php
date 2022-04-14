@@ -8,13 +8,18 @@ function view(string $name, array $data = [])
     return require "views/{$name}/{$name}.view.php";
 }
 
-function redirect(string $path)
+function redirect(string $path, bool $permanent = false)
 {
-    header("Location: /{$path}");
+    $responseCode = $permanent ? 301 : 302;
+    $host = $_SERVER['HTTP_HOST'];
+    header("Location: http://{$host}{$path}", true, $responseCode);
+    exit;
 }
 
-function json(mixed $data): bool|string
+function json(mixed $data, int $statusCode = 200): bool|string
 {
+    http_response_code($statusCode);
+    header('Content-Type: application/json');
     $encoded = json_encode(match (gettype($data)) {
         'array', 'string' => $data,
         'boolean' => var_export($data, true),
