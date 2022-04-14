@@ -43,16 +43,10 @@ window.onload = function (){
                 password: form.password.value
             })
         });
-        console.log(JSON.stringify({
-
-            username: form.username.value,
-            password: form.password.value
-        }))
-        console.log(await res.text());
 
         if (res.status >= 200 && res.status <= 299) {
             const jwt = await res.text();
-            setCookie('stoken',jwt,1);
+            setCookie('token',jwt,1);
         } else {
             // Handle errors
             console.log(res.status, res.statusText);

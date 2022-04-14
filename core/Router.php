@@ -109,9 +109,9 @@ class Router
     public
     function authenticate(): bool
     {
-        if (Request::header('Autherization')) {
+        ##if (Request::header('Autherization')) {
 
-        }
+        ##}
         return true;
     }
 }

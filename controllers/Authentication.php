@@ -53,15 +53,9 @@ class Authentication
     public
     function login()
     {
-        $username = $_POST['username'] ?? "";
-        $password = $_POST['password'] ?? "";
-        dd(
-            $_POST
-        );
+        $username = Request::payload()->username;
+        $password = Request::payload()->password;
 
-        dd(
-           $username.' '.$password
-        );
 
         if (!User::where('username', '=', $username)->exists()) {
             return json([

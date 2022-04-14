@@ -25,6 +25,6 @@ class Request
     public
     static function payload()
     {
-        return file_get_contents('php://input');
+        return json_decode(file_get_contents('php://input'));
     }
 }
