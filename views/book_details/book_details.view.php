@@ -10,8 +10,12 @@
     <title><?= $book->title ?></title>
 
     <link rel="stylesheet" href="/views/book_details/book_details.css">
+
     <script type="application/javascript"
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="application/javascript"
+            src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
     <script type="application/javascript" src="/views/book_details/book_details.js"></script>
 
 </head>
@@ -97,7 +101,7 @@
                         <?= $book->views ?>
                     </div>
                     <h1 class="flex-1 content-center"><?= $book->title ?></h1>
-                    <div id="favourite-btn" class="animate-icon-btn <?php $book->isFavourite() ?>">
+                    <div id="favourite-btn" class="animate-icon-btn <?php $isFavourite ?>">
                         <svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="40.944"
                              height="39.369"
                              viewBox="0 0 40.944 39.369">

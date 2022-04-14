@@ -7,8 +7,9 @@ class Pages
     function bookDetails(int $id)
     {
         $book = Book::find($id);
+        $isFavourite = Authentication::$user->isFavourite($book->id);
 
-        return view('book_details', compact('book'));
+        return view('book_details', compact('book', 'isFavourite'));
     }
 
     public
@@ -28,9 +29,9 @@ class Pages
     public
     function search()
     {
-        $title=$_GET["searchtitle"];
-        $books = Book::where('title','like',"%{$title}%")
-        ->get();
+        $title = $_GET["searchtitle"];
+        $books = Book::where('title', 'like', "%{$title}%")
+            ->get();
 
         return view('search_results', compact('books'));
     }

@@ -1,5 +1,15 @@
 $(document).ready(function () {
-    const bookId = window.location.pathname.split('/').at(-1);
+
+    // get token
+    const token = Cookies.get('token');
+    const headers = {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }
+
+    // get book id
+    const bookId = $(location).attr('href').split('/').at(-1);
 
     // favourite button
     let fav_btn = $('#favourite-btn');
@@ -7,13 +17,17 @@ $(document).ready(function () {
         // animate icon
         $(this).toggleClass('active');
         // update remote
-        $.post(
+        $.ajax(
             '/api/toggle_favourite',
             {
-                'book_id': bookId,
-            },
-            r => {
-                console.log(r);
+                method: 'POST',
+                data: JSON.stringify({
+                    'book_id': bookId,
+                }),
+                headers: headers,
+                success: res => {
+                    console.log(res);
+                },
             }
         )
     });
