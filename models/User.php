@@ -40,4 +40,24 @@ class User extends Model
             ->exists();
     }
 
+    public function hasReviewed(mixed $bookId): bool
+    {
+        return Review::where('user_id', '=', $this->id)
+            ->where('book_id', '=', $bookId)
+            ->exists();
+    }
+
+    public function bookReview(mixed $bookId): false|Review
+    {
+        $result = Review::where('user_id', '=', $this->id)
+            ->where('book_id', '=', $bookId)
+            ->get();
+
+        if ($result == false) {
+            return false;
+        }
+
+        return $result[0];
+    }
+
 }

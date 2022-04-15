@@ -178,11 +178,12 @@ class QueryBuilder
     function update(Model $model): bool
     {
         $cols = static::getSqlUpdateColsWithValues($model);
+        $primaryKey = $model::primaryKey;
 
         $query =
             "UPDATE {$this->table} " .
             "SET {$cols} " .
-            "WHERE {$model::getPrimaryKey()} = {$model->{$model::getPrimaryKey()}} ";
+            "WHERE {$primaryKey} = {$model->{$primaryKey}} ";
 
         $statement = $this->pdo->prepare($query . ';');
         return $statement->execute();

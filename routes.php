@@ -10,3 +10,4 @@ $router->get('book_details/{id}', 'Pages@bookDetails');
 $router->post('api/login', 'Authentication@login');
 $router->post('api/register', 'Authentication@register');
 $router->post('api/toggle_favourite', 'Favourites@toggleFavourite');
+$router->put('api/update_review', 'Reviews@updateReview');

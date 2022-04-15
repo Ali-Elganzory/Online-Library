@@ -9,7 +9,7 @@
 
     <title><?= $book->title ?></title>
 
-    <link rel="stylesheet" href="/views/book_details/book_details.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
     <script type="application/javascript"
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -24,7 +24,7 @@
 
 <div id="book_details_page">
 
-    <div class="height-max width-max row cross-stretch">
+    <div class="min-h-100vh h-100vh width-max row cross-stretch">
 
         <!-- Reviews column -->
         <div class="bg-primary flex-3 column cross-center">
@@ -35,38 +35,54 @@
                 <div class="column">
                     <div class="row">
                         <div class="flex-1"></div>
-                        <div>
-                            <?php foreach ([1, 2, 3, 4] as $i): ?>
-                                <svg class="pr-0-5" xmlns="http://www.w3.org/2000/svg" width="22.615" height="25.474"
-                                     viewBox="0 0 26.615 25.474">
-                                    <path id="Icon_awesome-star" data-name="Icon awesome-star"
-                                          d="M13.321.885,10.073,7.472,2.8,8.532a1.593,1.593,0,0,0-.881,2.716l5.258,5.124L5.939,23.61a1.591,1.591,0,0,0,2.308,1.677l6.5-3.418,6.5,3.418A1.592,1.592,0,0,0,23.56,23.61l-1.244-7.238,5.258-5.124a1.593,1.593,0,0,0-.881-2.716l-7.268-1.06L16.177.885a1.593,1.593,0,0,0-2.856,0Z"
-                                          transform="translate(-1.441 0.001)" fill="#ffc02d"/>
-                                </svg>
-                            <?php endforeach; ?>
-                            <?php foreach ([5] as $i): ?>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22.583" height="24.231"
-                                     viewBox="0 0 30.583 29.231">
-                                    <path id="Icon_feather-star" data-name="Icon feather-star"
-                                          d="M16.791,3l4.262,8.633,9.53,1.393-6.9,6.716,1.627,9.488-8.523-4.482L8.268,29.231,9.9,19.743,3,13.026l9.53-1.393Z"
-                                          transform="translate(-1.5 -1.5)" fill="none" stroke="#ffc02d"
-                                          stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                                </svg>
+                        <div id="rate-bar" class="row">
+                            <div id="last-rating" class="hidden"><?= $userReview->rating ?? -1 ?></div>
+                            <?php foreach ([1, 2, 3, 4, 5] as $i): ?>
+                                <span id="rate-star-<?= $i ?>"
+                                      class=" pr-0-5 animate-icon-btn">
+                                    <svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="22.615"
+                                         height="25.474"
+                                         viewBox="0 0 26.615 25.474">
+                                        <path id="Icon_awesome-star" data-name="Icon awesome-star"
+                                              d="M13.321.885,10.073,7.472,2.8,8.532a1.593,1.593,0,0,0-.881,2.716l5.258,5.124L5.939,23.61a1.591,1.591,0,0,0,2.308,1.677l6.5-3.418,6.5,3.418A1.592,1.592,0,0,0,23.56,23.61l-1.244-7.238,5.258-5.124a1.593,1.593,0,0,0-.881-2.716l-7.268-1.06L16.177.885a1.593,1.593,0,0,0-2.856,0Z"
+                                              transform="translate(-1.441 0.001)" fill="#ffc02d"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22.583" height="24.231"
+                                         viewBox="0 0 30.583 29.231">
+                                        <path id="Icon_feather-star" data-name="Icon feather-star"
+                                              d="M16.791,3l4.262,8.633,9.53,1.393-6.9,6.716,1.627,9.488-8.523-4.482L8.268,29.231,9.9,19.743,3,13.026l9.53-1.393Z"
+                                              transform="translate(-1.5 -1.5)" fill="none" stroke="#ffc02d"
+                                              stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                    </svg>
+                                </span>
                             <?php endforeach; ?>
                         </div>
                         <div class="flex-1"></div>
                     </div>
 
-                    <textarea placeholder="What do you think?" rows="4"
-                              class="p-1 mv-1 text-sm rounded-0-5 bg-white no-resize border-0 text-color"></textarea>
+                    <textarea id="review-text" placeholder="What do you think?" rows="4"
+                              class="p-1 mv-1 text-sm rounded-0-5 bg-white no-resize no-border no-outline text-color"
+                              required><?= $userReview->text ?? '' ?></textarea>
 
-                    <button class="h-3 rounded-0-5 border-0 bg-primary elevation-1 text-white">review</button>
+                    <div class="stack position-relative">
+                        <button id="review-btn" class="h-3 text-button">review</button>
+                        <div id="review-btn-loader" class="loader-4 center loader4-color-primary hidden"><span></span>
+                        </div>
+                    </div>
+
+                    <div id="review-success-msg" class="mt-0-5 mh-1 hidden text-success text-center">
+                        Your review is submitted.
+                    </div>
+                    <div id="review-failed-msg" class="mt-0-5 mh-1 hidden text-failed text-center">
+                        Sorry, there's been an error. We're working on it.
+                    </div>
                 </div>
+
             </div>
 
-            <?php require 'views/partials/review_card/review_card.view.php' ?>
-            <?php require 'views/partials/review_card/review_card.view.php' ?>
-            <?php require 'views/partials/review_card/review_card.view.php' ?>
+            <?php foreach ($bookReviews as $review): ?>
+                <?php require 'views/partials/review_card/review_card.view.php' ?>
+            <?php endforeach; ?>
 
         </div>
 
@@ -75,13 +91,15 @@
 
             <div class="column cross-stretch ph-6 mt-1">
                 <div class="row cross-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                         viewBox="0 0 50.483 50.483">
-                        <path id="Icon_awesome-arrow-alt-circle-left" data-name="Icon awesome-arrow-alt-circle-left"
-                              d="M25.8,51.045A25.241,25.241,0,1,1,51.045,25.8,25.237,25.237,0,0,1,25.8,51.045ZM37.61,21.326H25.8V14.109a1.222,1.222,0,0,0-2.086-.865L12.084,24.939a1.21,1.21,0,0,0,0,1.72L23.717,38.353a1.221,1.221,0,0,0,2.086-.865V30.282H37.61a1.225,1.225,0,0,0,1.221-1.221V22.547A1.225,1.225,0,0,0,37.61,21.326Z"
-                              transform="translate(-0.563 -0.563)" fill="#6C63FF"/>
-                    </svg>
-                    <div class="w-4"></div>
+                    <?php if ($isSelfReferred): ?>
+                        <svg id="back-button" class="icon-btn" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                             viewBox="0 0 50.483 50.483">
+                            <path id="Icon_awesome-arrow-alt-circle-left" data-name="Icon awesome-arrow-alt-circle-left"
+                                  d="M25.8,51.045A25.241,25.241,0,1,1,51.045,25.8,25.237,25.237,0,0,1,25.8,51.045ZM37.61,21.326H25.8V14.109a1.222,1.222,0,0,0-2.086-.865L12.084,24.939a1.21,1.21,0,0,0,0,1.72L23.717,38.353a1.221,1.221,0,0,0,2.086-.865V30.282H37.61a1.225,1.225,0,0,0,1.221-1.221V22.547A1.225,1.225,0,0,0,37.61,21.326Z"
+                                  transform="translate(-0.563 -0.563)" fill="#6C63FF"/>
+                        </svg>
+                        <div class="w-4"></div>
+                    <?php endif; ?>
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="31.5" height="36" viewBox="0 0 31.5 36">
                             <path id="Icon_awesome-share-alt" data-name="Icon awesome-share-alt"
@@ -92,7 +110,7 @@
                     <div class="w-2 content-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5" height="40" viewBox="0 0 1.5 40">
                             <line id="Line_4" data-name="Line 4" y2="40" transform="translate(1)" fill="none"
-                                  stroke="#707070" stroke-width="2"/>
+                                  stroke="#a3a3a3" stroke-width="1"/>
                         </svg>
                     </div>
                     <div class="text-center">
@@ -101,7 +119,7 @@
                         <?= $book->views ?>
                     </div>
                     <h1 class="flex-1 content-center"><?= $book->title ?></h1>
-                    <div id="favourite-btn" class="animate-icon-btn <?php $isFavourite ?>">
+                    <div id="favourite-btn" class="animate-icon-btn <?= $isFavourite ? "active" : "" ?>">
                         <svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="40.944"
                              height="39.369"
                              viewBox="0 0 40.944 39.369">

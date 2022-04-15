@@ -4,7 +4,11 @@ CREATE DATABASE IF NOT EXISTS online_library;
 USE online_library;
 
 -- Drop tables.
-DROP TABLE IF EXISTS books, users, user_favourites;
+DROP TABLE IF EXISTS
+    books,
+    users,
+    user_favourites,
+    reviews;
 
 -- Create tables.
 CREATE TABLE books
@@ -34,6 +38,18 @@ CREATE TABLE user_favourites
     FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
 );
 
+CREATE TABLE reviews
+(
+    id         INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id    INT          NOT NULL,
+    book_id    INT          NOT NULL,
+    rating     INT          NOT NULL,
+    text       VARCHAR(100) NOT NULL,
+    updated_at timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
+);
+
 -- Populate tables.
 INSERT INTO books (title, author, description, image_url, views)
 VALUES ("1984",
@@ -59,6 +75,11 @@ INSERT INTO user_favourites (user_id, book_id)
 VALUES (1, 1),
        (1, 2),
        (2, 2);
+
+INSERT INTO reviews (user_id, book_id, rating, text)
+VALUES (1, 1, 5, "This is a test review. This is a test review. This is a test review."),
+       (2, 1, 3, "This is a test review. This is a test review. This is a test review."),
+       (2, 2, 4, "This is a test review. This is a test review. This is a test review.");
 
 -- Show tables.
 SHOW TABLES;

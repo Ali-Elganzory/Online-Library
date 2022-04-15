@@ -36,6 +36,8 @@ return array(
     'Pages' => $baseDir . '/controllers/Pages.php',
     'QueryBuilder' => $baseDir . '/core/database/QueryBuilder.php',
     'Request' => $baseDir . '/core/Request.php',
+    'Review' => $baseDir . '/models/Review.php',
+    'Reviews' => $baseDir . '/controllers/Reviews.php',
     'Router' => $baseDir . '/core/Router.php',
     'Tests\\TokenBaseTest' => $vendorDir . '/nowakowskir/php-jwt/tests/TokenBaseTest.php',
     'Tests\\TokenEncodedTest' => $vendorDir . '/nowakowskir/php-jwt/tests/TokenTest.php',

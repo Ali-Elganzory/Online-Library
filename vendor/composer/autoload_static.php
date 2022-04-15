@@ -51,6 +51,8 @@ class ComposerStaticInit9a7861acf7bb7a8188575aaa25489b52
         'Pages' => __DIR__ . '/../..' . '/controllers/Pages.php',
         'QueryBuilder' => __DIR__ . '/../..' . '/core/database/QueryBuilder.php',
         'Request' => __DIR__ . '/../..' . '/core/Request.php',
+        'Review' => __DIR__ . '/../..' . '/models/Review.php',
+        'Reviews' => __DIR__ . '/../..' . '/controllers/Reviews.php',
         'Router' => __DIR__ . '/../..' . '/core/Router.php',
         'Tests\\TokenBaseTest' => __DIR__ . '/..' . '/nowakowskir/php-jwt/tests/TokenBaseTest.php',
         'Tests\\TokenEncodedTest' => __DIR__ . '/..' . '/nowakowskir/php-jwt/tests/TokenTest.php',

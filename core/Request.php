@@ -49,4 +49,15 @@ class Request
         // Pages
         return $_COOKIE["token"] ?? false;
     }
+
+    public
+    static function isSelfReferred(): bool
+    {
+        if (!array_key_exists("HTTP_REFERER", $_SERVER)) {
+            return false;
+        }
+
+        $refererUrl = parse_url($_SERVER["HTTP_REFERER"]);
+        return $refererUrl != null && "{$refererUrl['host']}:{$refererUrl['port']}" == $_SERVER["HTTP_HOST"];
+    }
 }

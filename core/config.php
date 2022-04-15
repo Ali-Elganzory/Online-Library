@@ -15,7 +15,7 @@ return [
             'alg' => 'HS256',
             'typ' => 'JWT',
         ],
-        'exp' => 1000,
+        'exp' => 86_400,
         'privateKey' => '123456',
     ],
 ];

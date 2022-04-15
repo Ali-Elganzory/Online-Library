@@ -6,10 +6,24 @@ class Pages
     public
     function bookDetails(int $id)
     {
+        $user = Authentication::$user;
         $book = Book::find($id);
-        $isFavourite = Authentication::$user->isFavourite($book->id);
+        $isFavourite = $user->isFavourite($book->id);
+        $userReview = $user->bookReview($book->id);
+        $bookReviews = array_filter($book->reviews(), fn($e) => $e->user_id != $user->id);
+        $isSelfReferred = Request::isSelfReferred();
 
-        return view('book_details', compact('book', 'isFavourite'));
+        $book->incrementViews();
+
+        return view(
+            'book_details',
+            compact(
+                'book',
+                'isFavourite',
+                'userReview',
+                'bookReviews',
+                'isSelfReferred',
+            ));
     }
 
     public

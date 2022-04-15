@@ -6,6 +6,7 @@ class Router
     protected array $routes = [
         "GET" => [],
         "POST" => [],
+        "PUT" => [],
     ];
 
     public
@@ -28,6 +29,12 @@ class Router
     function post(string $uri, string $controller): void
     {
         $this->routes["POST"][$uri] = $controller;
+    }
+
+    public
+    function put(string $uri, string $controller): void
+    {
+        $this->routes["PUT"][$uri] = $controller;
     }
 
     /**

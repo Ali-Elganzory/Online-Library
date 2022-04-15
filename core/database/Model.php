@@ -126,30 +126,43 @@ class Model
     }
 
     protected
-    function hasMany(string $otherClass, string $relationClass): QueryBuilder
+    function hasMany(string $otherClass, ?string $relationClass = null): QueryBuilder
     {
         $table = static::getTableName();
         $primaryKey = static::primaryKey;
-        $relationTable = $relationClass::getTableName();
         $otherTable = $otherClass::getTableName();
         $otherPrimaryKey = $otherClass::primaryKey;
         $foreignKey = substr($table, 0, -1) . '_' . $primaryKey;
         $otherForeignKey = substr($otherTable, 0, -1) . '_' . $otherPrimaryKey;
 
-        return static::getQueryBuilder()
-            ->select("SELECT {$otherTable}.*")
-            ->join(
-                $relationTable,
+        $query = static::getQueryBuilder()
+            ->select("SELECT {$otherTable}.*");
+
+        if ($relationClass == null) {
+            $query = $query->join(
+                $otherTable,
                 "{$table}.{$primaryKey}",
                 '=',
-                "{$relationTable}.{$foreignKey}",
-            )
-            ->join(
-                $otherTable,
-                "{$relationTable}.{$otherForeignKey}",
-                '=',
-                "{$otherTable}.{$otherPrimaryKey}",
-            )
+                "{$otherTable}.{$foreignKey}",
+            );
+        } else {
+            $relationTable = $relationClass::getTableName();
+            $query = $query
+                ->join(
+                    $relationTable,
+                    "{$table}.{$primaryKey}",
+                    '=',
+                    "{$relationTable}.{$foreignKey}",
+                )
+                ->join(
+                    $otherTable,
+                    "{$relationTable}.{$otherForeignKey}",
+                    '=',
+                    "{$otherTable}.{$otherPrimaryKey}",
+                );
+        }
+
+        return $query
             ->where("{$table}.{$primaryKey}", '=', $this->{$primaryKey})
             ->class($otherClass);
     }
