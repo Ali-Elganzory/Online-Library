@@ -23,14 +23,14 @@ class Authentication
     public
     function register()
     {
-        $username = $_POST['newusername'] ?? "";
-        $password = $_POST['newpassword'] ?? "";
+        $username = Request::payload()->username;
+        $password = Request::payload()->password;
 
         if (User::where('username', '=', $username)->exists()) {
             return json([
                 'succeeded' => false,
                 'msg' => "username already exists",
-            ]);
+            ],400);
         }
 
         $user = new User(0, $username, $password, '');
@@ -49,7 +49,8 @@ class Authentication
 
         return json([
             'succeeded' => true,
-            'token' => $tokenEncoded->toString()]);
+            'token' => $tokenEncoded->toString()]
+        );
 
     }
 
@@ -63,7 +64,7 @@ class Authentication
             return json([
                 'succeeded' => false,
                 'msg' => "username or password is wrong.",
-            ]);
+            ],400);
         }
 
         $user = User::where('username', '=', $username)
@@ -73,7 +74,7 @@ class Authentication
             return json([
                 'succeeded' => false,
                 'msg' => "username or password is wrong.",
-            ]);
+            ], 400);
         }
 
         $tokenEncoded = (new TokenDecoded(
@@ -104,15 +105,20 @@ class Authentication
         $privateKey = $authConfig['privateKey'];
 
         // validation
-        $encodedToken = new TokenEncoded($token);
-        if (!$encodedToken->validate($privateKey, static::$algorithm)) {
+
+        try {
+            $encodedToken = new TokenEncoded($token);
+            if (!$encodedToken->validate($privateKey, static::$algorithm)) {
+                redirect('/login');
+            }
+            // user extraction
+            $decodedToken = $encodedToken->decode();
+            $payload = $decodedToken->getPayload();
+            static::$user = User::find($payload["user_id"]);
+        }catch (Exception $e){
             redirect('/login');
         }
 
-        // user extraction
-        $decodedToken = $encodedToken->decode();
-        $payload = $decodedToken->getPayload();
-        static::$user = User::find($payload["user_id"]);
 
         return true;
     }

@@ -8,6 +8,8 @@
     <script src="views/loginpage/login.js"></script>
     <script type="application/javascript"
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="application/javascript"
+            src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 
 </head>
 <body>
@@ -195,35 +197,38 @@
 </div>
 <form id="signin" name="signin">
     <fieldset>
-        <p>Log In</p>
+        <div class="form-title">Log In</div>
         <div style="position: absolute; alignment: center; width: 100%">
-            <div style="margin-top: 50px">
+            <div style="margin-top: 50px; margin-bottom: 50px">
                 <label for="uname">Username:</label>
                 <input class="forminput" type="text" id="uname" name="username" placeholder="Username">
             </div>
-            <div style="margin-top: 15px; margin-bottom: 50px">
+            <div style="margin-top: 15px;">
                 <label for="pass">Password:</label>
                 <input class="forminput" type="password" id="pass" name="password" placeholder="Password">
             </div>
+            <div id="loginerror" class="errormessage">wrong username or password</div>
         </div>
         <br>
         <input id="signin-btn" name="signin" type="submit" value="LOGIN">
+        <br style="line-height: 0.1">
     </fieldset>
 </form>
-<form id="signup" action="loginpage.php" name="signup" method="post">
+<form id="signup" name="signup">
     <fieldset>
-        <p>Create An Account</p>
+        <div class="form-title">Create An Account</div>
         <div style="position: absolute; alignment: center; width: 100%">
-            <div style="margin-top: 50px">
+            <div style="margin-top: 50px; margin-bottom: 50px">
                 <label for="nuname">Username:</label>
                 <input class="forminput" type="text" id="nuname" name="newusername" placeholder="Username">
+                <div id="registererror" class="errormessage">username already used</div>
             </div>
             <div style="margin-top: 15px;">
                 <label for="npass">Password:</label>
                 <input class="forminput" type="password" id="npass" name="newpassword" placeholder="Password">
             </div>
         </div>
-        <input name="register" type="submit" value="Register" onclick="closeForm('signup')">
+        <input name="register" type="submit" value="Register">
 
     </fieldset>
 

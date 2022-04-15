@@ -50,11 +50,12 @@ form{
     transition: opacity 600ms ease-in-out;
 }
 
-form p{
+.form-title{
+    word-wrap: break-word;
     text-align: center;
     font-size: 50px;
     color: Black;
-    margin-top: 50px;
+    margin-top: 25px;
     font-family: sans-serif;
 }
 
@@ -64,7 +65,7 @@ fieldset{
     border: none;
     height: 100%;
     width: 100%;
-    padding: 40px;
+    padding: 20px;
 }
 
 legend{
@@ -98,7 +99,9 @@ form input[type=submit]{
     border: 0;
     outline: 0;
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
+    margin-bottom: 0;
+    transition: bottom 250ms;
 }
 
 input[type=button]{
@@ -109,4 +112,12 @@ input[type=button]{
     height: 60px;
     color: white;
     font-size: 30px;
+}
+
+.errormessage{
+    display: none;
+    margin-top: 10px;
+    color: red;
+    font-size: 15px;
+    float: left;
 }

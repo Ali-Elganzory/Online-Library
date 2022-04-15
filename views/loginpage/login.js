@@ -1,39 +1,12 @@
 window.onload = function () {
-    const store = {};
-    const loginBtn = document.getElementById('signin-btn');
-    const form = document.forms[0];
 
-
-    console.log(loginBtn);
-
-//////////// Cookie set and get functions ////////////////
-    function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-
-    function getCookie(cname) {
-        let name = cname + "=";
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) === ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) === 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-
-//////////////////////////////////////////////////////////
-
-
-    form.addEventListener('submit', async (e) => {
+    const form1 = document.forms[0];
+    const form2 = document.forms[1];
+    const login_btn = document.getElementById("signin-btn")
+    const register_error = document.getElementById("registererror");
+    const login_error = document.getElementById("loginerror");
+    
+    form1.addEventListener('submit', async (e) => {
         e.preventDefault();
         const res = await fetch('/api/login', {
             method: 'POST',
@@ -43,17 +16,44 @@ window.onload = function () {
             },
             body: JSON.stringify({
 
-                username: form.username.value,
-                password: form.password.value
+                username: form1.username.value,
+                password: form1.password.value
             })
         });
 
         if (res.status >= 200 && res.status <= 299) {
             const jwt = await res.json();
-            console.log(jwt);
-            setCookie('token', jwt.token, 1);
+            Cookies.set('token', jwt.token, {expires:1});
+            login_error.style.display = "none";
         } else {
             // Handle errors
+            login_error.style.display = "block";
+            console.log(res.status, res.statusText);
+        }
+    });
+
+    form2.addEventListener('submit', async (g) => {
+        g.preventDefault();
+        const res = await fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+
+                username: form2.newusername.value,
+                password: form2.newpassword.value
+            })
+        });
+
+        if (res.status >= 200 && res.status <= 299) {
+            const jwt = await res.json();
+            Cookies.set('token', jwt.token, {expires:1});
+            register_error.style.display = "none";
+        } else {
+            // Handle errors
+            register_error.style.display = "block";
             console.log(res.status, res.statusText);
         }
     });
