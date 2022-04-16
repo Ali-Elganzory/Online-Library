@@ -11,7 +11,7 @@
             <div style="position: relative; display: flex;">
                 <input type="search" placeholder="Find Book..." name="searchtitle" id="bsearch">
 
-                <input id="search-icon" type="image" src="../../assets/search-icon-svg-28.png" alt="Search">
+                <input id="search-icon" type="image" src="../../assets/images/search-icon-svg-28.png" alt="Search">
             </div>
         </form>
     </div>
