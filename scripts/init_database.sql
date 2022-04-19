@@ -8,7 +8,8 @@ DROP TABLE IF EXISTS
     books,
     users,
     user_favourites,
-    reviews;
+    reviews,
+    recommendations;
 
 -- Create tables.
 CREATE TABLE books
@@ -46,6 +47,17 @@ CREATE TABLE reviews
     rating     INT          NOT NULL,
     text       VARCHAR(100) NOT NULL,
     updated_at timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
+);
+
+CREATE TABLE recommendations
+(
+    id         INT       NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id    INT       NOT NULL,
+    book_id    INT       NOT NULL,
+    rating     DECIMAL   NOT NULL,
+    updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (book_id) REFERENCES books (id) ON DELETE CASCADE
 );

@@ -21,7 +21,8 @@ class User extends Model
             ->get();
     }
 
-    public function toggleFavourite(mixed $bookId): bool
+    public
+    function toggleFavourite(mixed $bookId): bool
     {
         if ($this->isFavourite($bookId)) {
             return UserFavourite::where('user_id', '=', $this->id)
@@ -33,21 +34,24 @@ class User extends Model
         return (new UserFavourite(0, $this->id, $bookId))->insert();
     }
 
-    public function isFavourite(mixed $bookId): bool
+    public
+    function isFavourite(mixed $bookId): bool
     {
         return UserFavourite::where('user_id', '=', $this->id)
             ->where('book_id', '=', $bookId)
             ->exists();
     }
 
-    public function hasReviewed(mixed $bookId): bool
+    public
+    function hasReviewed(mixed $bookId): bool
     {
         return Review::where('user_id', '=', $this->id)
             ->where('book_id', '=', $bookId)
             ->exists();
     }
 
-    public function bookReview(mixed $bookId): false|Review
+    public
+    function bookReview(mixed $bookId): false|Review
     {
         $result = Review::where('user_id', '=', $this->id)
             ->where('book_id', '=', $bookId)
@@ -58,6 +62,27 @@ class User extends Model
         }
 
         return $result[0];
+    }
+
+
+    /**
+     * @return Book[]
+     * @throws Exception
+     */
+    public
+    function recommendedBooks()
+    {
+        $result = QueryBuilder::table('books')
+            ->select('SELECT books.*')
+            ->join('recommendations AS r', 'r.book_id', '=', 'books.id')
+            ->where('r.user_id', '=', "{$this->id}")
+            ->get();
+
+        if ($result == false) {
+            return [];
+        }
+
+        return $result;
     }
 
 }

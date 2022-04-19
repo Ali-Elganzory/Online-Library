@@ -23,7 +23,7 @@
                     </svg>
                 <?php endfor; ?>
                 <?php for ($i = $review->rating + 1; $i <= 5; ++$i): ?>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16.583" height="26.0"
+                    <svg class="pr-0-5" xmlns="http://www.w3.org/2000/svg" width="16.583" height="26.0"
                          viewBox="0 0 30.583 29.231">
                         <path id="Icon_feather-star" data-name="Icon feather-star"
                               d="M16.791,3l4.262,8.633,9.53,1.393-6.9,6.716,1.627,9.488-8.523-4.482L8.268,29.231,9.9,19.743,3,13.026l9.53-1.393Z"

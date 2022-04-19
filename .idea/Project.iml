@@ -7,7 +7,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nowakowskir/php-jwt" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (data)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ace" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
@@ -16,5 +16,11 @@
     <orderEntry type="library" name="js-cookie" level="application" />
     <orderEntry type="library" name="js-cookie" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
+  </component>
+  <component name="PackageRequirementsSettings">
+    <option name="versionSpecifier" value="Don't specify version" />
+  </component>
+  <component name="PyDocumentationSettings">
+    <option name="renderExternalDocumentation" value="true" />
   </component>
 </module>

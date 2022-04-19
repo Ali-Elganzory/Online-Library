@@ -2,10 +2,10 @@
 
 return [
     'database' => [
-        'name' => 'online_library',
-        'username' => 'root',
-        'password' => '',
-        'connection' => 'mysql:host=127.0.0.1',
+        ...json_decode(
+            file_get_contents('config/db.json'),
+            associative: true,
+        ),
         'options' => [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
         ],

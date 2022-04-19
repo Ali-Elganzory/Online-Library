@@ -1,0 +1,6 @@
+numpy
+pandas
+schedule
+sqlalchemy
+selenium
+watchdog

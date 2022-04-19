@@ -1,4 +1,5 @@
 import subprocess
+
 from watchdog.observers import Observer
 from watchdog.events import RegexMatchingEventHandler
 from selenium.webdriver import Edge
@@ -11,7 +12,6 @@ class FileChangedEventHandler(RegexMatchingEventHandler):
                  ignore_regexes: list[str] = None,
                  ignore_directories: bool = False,
                  case_sensitive: bool = False) -> None:
-
         super().__init__(regexes=regexes,
                          ignore_regexes=ignore_regexes,
                          ignore_directories=ignore_directories,
