@@ -98,7 +98,39 @@ html, body {
     justify-content: space-between;
 }
 
-.flex-srink {
+.main-space-2.column > * {
+    margin-bottom: 2em;
+}
+
+.main-space-2.column > *:last-child {
+    margin-bottom: 0;
+}
+
+.main-space-2.row > * {
+    margin-right: 2em;
+}
+
+.main-space-2.row > *:last-child {
+    margin-right: 0;
+}
+
+.main-space-4.column > * {
+    margin-bottom: 4em;
+}
+
+.main-space-4.column > *:last-child {
+    margin-bottom: 0;
+}
+
+.main-space-4.row > * {
+    margin-right: 4em;
+}
+
+.main-space-4.row > *:last-child {
+    margin-right: 0;
+}
+
+.flex-shrink {
     flex-shrink: 1;
 }
 
@@ -267,15 +299,15 @@ html, body {
     margin-top: 1em;
 }
 
-.mt-2 {
+.mt-2, .mv-2 {
     margin-top: 2em;
 }
 
-.mt-3 {
+.mt-3, .mv-3 {
     margin-top: 3em;
 }
 
-.mt-4 {
+.mt-4, .mv-4 {
     margin-top: 4em;
 }
 
@@ -289,6 +321,10 @@ html, body {
 
 .mb-1, .mv-1 {
     margin-bottom: 1em;
+}
+
+.mb-2, .mv-2 {
+    margin-bottom: 2em;
 }
 
 .mb-6, .mv-6 {
@@ -307,6 +343,10 @@ html, body {
     margin-right: 1em;
 }
 
+.mr-3, .mh-3 {
+    margin-right: 3em;
+}
+
 .mr-4, .mh-4 {
     margin-right: 4em;
 }
@@ -321,6 +361,10 @@ html, body {
 
 .ml-1, .mh-1 {
     margin-left: 1em;
+}
+
+.ml-3, .mh-3 {
+    margin-left: 3em;
 }
 
 .ml-4, .mh-4 {

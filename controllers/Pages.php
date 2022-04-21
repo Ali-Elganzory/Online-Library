@@ -4,6 +4,31 @@ class Pages
 {
 
     public
+    function login()
+    {
+        return view('loginpage');
+    }
+
+    public
+    function home()
+    {
+        $books = Book::all();
+        $recommendedBooks = Authentication::$user->recommendedBooks();
+
+        return view('mainpage', compact('books', 'recommendedBooks'));
+    }
+
+    public
+    function search()
+    {
+        $title = $_GET["searchtitle"];
+        $books = Book::where('title', 'like', "%{$title}%")
+            ->get();
+
+        return view('search_results', compact('books'));
+    }
+
+    public
     function bookDetails(int $id)
     {
         $user = Authentication::$user;
@@ -32,27 +57,4 @@ class Pages
         return view('not_found');
     }
 
-    public
-    function home()
-    {
-        $books = Book::all();
-
-        return view('mainpage', compact('books'));
-    }
-
-    public
-    function search()
-    {
-        $title = $_GET["searchtitle"];
-        $books = Book::where('title', 'like', "%{$title}%")
-            ->get();
-
-        return view('search_results', compact('books'));
-    }
-
-    public
-    function login()
-    {
-        return view('loginpage');
-    }
 }
