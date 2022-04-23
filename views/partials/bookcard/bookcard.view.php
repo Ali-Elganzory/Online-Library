@@ -12,7 +12,13 @@
                 <img src=<?=$book->image_url?>>
             </div>
             <div class="book-info">
-                <div class="book-title"><?= $book->title ?></div>
+                <div class="book-title"><?php
+                    $data = $book->title;
+                    if (strlen($data) > 14) {
+                        $data = substr($data, 0, 14) . '...';
+                    }
+                    echo $data;
+                    ?></div>
                 <div class="book-description"><?php
                     $data = $book->description;
                     if (strlen($data) > 132) {
