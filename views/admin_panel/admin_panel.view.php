@@ -11,8 +11,8 @@
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="views/admin_panel/admin_panel.css">
-        <link rel="stylesheet" href="views/loginpage/loginpage.css">
+        <link rel="stylesheet" href="public/css/admin_panel.css">
+        <link rel="stylesheet" href="public/css/loginpage.css">
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
@@ -24,7 +24,7 @@
                 src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 
 
-        <script src="views/admin_panel/admin_panel.js"></script>
+        <script src="/public/js/admin_panel.js"></script>
     </head>
     <body>
         <div id="dimbg" onclick="closeForm(active)"></div>

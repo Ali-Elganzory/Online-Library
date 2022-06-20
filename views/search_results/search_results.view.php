@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../../public/css/search_results.css">
+    <link rel="stylesheet" href="/public/css/search_results.css">
 </head>
 <body>
 <div style="padding: 100px">

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="views/partials/topnavigator/topnavigator.css">
+<link rel="stylesheet" href="/public/css/topnavigator.css">
 <div class="topnav">
     <a href="">Books</a>
     <a href="#favourites">Favourites</a>
@@ -11,7 +11,7 @@
             <div style="position: relative; display: flex;">
                 <input type="search" placeholder="Find Book..." name="searchtitle" id="bsearch">
 
-                <input id="search-icon" type="image" src="../../assets/images/search-icon-svg-28.png" alt="Search">
+                <input id="search-icon" type="image" src="public/images/search-icon-svg-28.png" alt="Search">
             </div>
         </form>
     </div>

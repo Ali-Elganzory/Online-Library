@@ -4,7 +4,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="/public/css/styles.css">
 
 </head>
 <body>

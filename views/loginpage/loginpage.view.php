@@ -3,9 +3,9 @@
 <head>
     <title>Log In</title>
 
-    <link rel="stylesheet" href="views/loginpage/loginpage.css">
+    <link rel="stylesheet" href="/public/css/loginpage.css">
 
-    <script src="views/loginpage/login.js"></script>
+    <script src="/public/js/login.js"></script>
     <script type="application/javascript"
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="application/javascript"

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <htm>
     <head>
-        <link rel="stylesheet" href="views/partials/bookcard/bookcard.css">
+        <link rel="stylesheet" href="/public/css/bookcard.css">
     </head>
     <body>
     <div class="book-card">
