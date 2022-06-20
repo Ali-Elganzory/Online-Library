@@ -10,7 +10,9 @@
 
 ## Running
 
-Run the `launch.sh` script.
+There are two ways.
+
+1. Run the `launch.sh` script.
 
 ```bash
 . launch.sh
@@ -21,6 +23,15 @@ This will
 - Scrap the web for book information and add it to the database.
 - Run the books recommender system.
 - Run a local php server to serve the app at `localhost:9000`.
+
+2. Run the commands
+
+```powershell
+python scripts/init_database.py
+python scripts/book_scraper/scraper.py          <--[optional]
+python scripts/recommender_system/recommend.py  <--[optional]
+php -S localhost:9000
+```
 
 ## Users
 
