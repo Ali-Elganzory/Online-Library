@@ -31,6 +31,19 @@ function turn_page(page_no){
 
 }
 
+function manageUsers(){
+    document.getElementById("manage-books").style.display= "none";
+    document.getElementById("manage-users").style.display= "block";
+    document.getElementById("users-tab").className="active navigation-tabs";
+    document.getElementById("books-tab").className="navigation-tabs";
+}
+
+function manageBooks(){
+    document.getElementById("manage-books").style.display= "block";
+    document.getElementById("manage-users").style.display= "none";
+    document.getElementById("users-tab").className="navigation-tabs";
+    document.getElementById("books-tab").className="active navigation-tabs";
+}
 
 ///// Image Uploader /////
 $(document).ready(function () {
@@ -41,14 +54,15 @@ $(document).ready(function () {
         "Content-Type": "application/json",
         "Accept": "application/json",
     }
-    file_uploader.onchange = function(event) {
-        let image = document.getElementById(book_being_edited.toString());
-        let file = file_uploader.files[0];
+    $("form[name='editpic']").on("submit", function(ev) {
+        ev.preventDefault(); // Prevent browser default submit.
+        //let image = document.getElementById(book_being_edited.toString());
+        //let file = file_uploader.files[0];
         //console.log(file);
         //let imageURL = URL.createObjectURL(file);
         //var form = document.getElementById('editpic');
-        var formdata = new FormData();
-        formdata.append("image", file);
+        var formdata = new FormData(this);
+        //formdata.append("image", file);
         console.log(formdata);
         $.ajax({
             url: `api/changeBookPic/${book_being_edited}`,
@@ -65,7 +79,7 @@ $(document).ready(function () {
                 image.src = jwt.image_url;
             },
         })
-    }
+    })
 
 });
 

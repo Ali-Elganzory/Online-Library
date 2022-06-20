@@ -1,8 +1,7 @@
 <link rel="stylesheet" href="/public/css/topnavigator.css">
 <div class="topnav">
-    <a href="">Books</a>
-    <a href="#favourites">Favourites</a>
-    <a class="active" href="#favourites">Find Book</a>
+    <a class="active" href="">Books</a>
+    <a href="#favourites">Your Profile</a>
     <div style="height: 100%; margin-top: 10px">
 
         <input class="icons" type="image" src="../../../public/images/png-clipart-computer-icons-hamburger-button-dots-kebab-menu-text-rectangle-thumbnail.png" alt="Search">

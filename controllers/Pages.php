@@ -30,7 +30,7 @@ class Pages
         $books = Book::where('title', 'like', "%{$title}%")
             ->get();
 
-        return view('search_results', compact('books'));
+        return view('search_results', compact('books', 'title'));
     }
 
     public
@@ -101,16 +101,16 @@ class Pages
     function changeBookPic(int $id)
     {
 
-        $error = $_FILES["image"]["error"];
+        $error = $_FILES["formFileLg"]["error"];
         if ($error == UPLOAD_ERR_OK) {
-            $name = $_FILES["image"]["name"][$key];
+            $name = $_FILES["formFileLg"]["name"][$key];
             $name = explode("_", $name);
             $imagename = '';
             foreach ($name as $letter) {
                 $imagename .= $letter;
             }
 
-            move_uploaded_file($_FILES["image"]["tmp_name"][$key], "public/book_images/" . $imagename);
+            move_uploaded_file($_FILES["formFileLg"]["tmp_name"][$key], "public/book_images/" . $imagename);
 
             return json([
                     'image_url' => $_SERVER['HTTP_REFERER'] . "/public/book_images/" . $imagename]

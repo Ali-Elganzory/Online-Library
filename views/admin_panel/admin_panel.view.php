@@ -28,9 +28,9 @@
     </head>
     <body>
         <div id="dimbg" onclick="closeForm(active)"></div>
-        <div class="manage-books">
+        <div class="manage-books" id="manage-books">
             <div class="list">
-                <div class="list-title">
+                <div class="list-title" >
                     Books Manager
                 </div>
                 <div class="list-header">
@@ -83,15 +83,7 @@
 
 
         </div>
-
-        <div role="navigation">
-            <ul class="nav nav-tabs" style="position: fixed; bottom: 0; margin-left: 50px">
-                <li role="presentation" class="active navigation-tabs"><a href="#">Manage Books</a></li>
-                <li role="presentation" class="navigation-tabs"><a href="#">Manage Members</a></li>
-                <li role="presentation" class="navigation-tabs"><a href="#">Statistics</a></li>
-            </ul>
-        </div>
-        <div class="manage-users" style = "display:none;">
+        <div class="manage-users" id = "manage-users" style = "display:none;">
             <div class="list">
                 <div class="list-title">
                     Users Manager
@@ -107,19 +99,11 @@
                 </div>
                 <?php foreach (array_slice($users,0,21) as $user):?>
                 <div class="list-item">
-                    <div class="data" contenteditable="true" style="width: 10%">
-                        <span><?=$book->title?></span>
+                <div class="data" contenteditable="true" style="width: 50%">
+                        <span><?=$user->username?></span>
                     </div>
-                    <div class="data" contenteditable="true" style="width: 10%">
-                        <span><?=$book->author?></span>
-                    </div>
-                    <div class="data" contenteditable="true" style="width: 60%">
-                        <span>
-                            <?=$book->description?>
-                        </span>
-                    </div>
-                    <div class="image" style="width: 20%" onclick="openForm('editpic', '<?=$book->id?>')">
-                        <img id="<?=$book->id?>" src="<?=$book->image_url?>">
+                    <div class="image" style="width: 50%" onclick="openForm('editpic', '<?=$book->id?>')">
+                        <img id="<?=$user->id?>" src="<?=$user->image_url?>">
                     </div>
                 </div>
                 <?php endforeach;?>
@@ -145,14 +129,16 @@
             </div>
         </div>
         
+        <div role="navigation">
+            <ul class="nav nav-tabs" style="position: fixed; bottom: 0; margin-left: 50px">
+                <li id="books-tab" role="presentation" class="active navigation-tabs" onclick="manageBooks()"><a href="#">Manage Books</a></li>
+                <li id="users-tab" role="presentation" class="navigation-tabs" onclick="manageUsers()"><a href="#">Manage Members</a></li>
+            </ul>
 
-        <div class="dashboard">
-        </div>
-
-        <form action="api/changeBookPic/id" method="post" class="editpic" id="editpic" name="editpic" style="height: 250px" enctype="multipart/form-data">
+        <form action="" method="post" class="editpic" id="editpic" name="editpic" style="height: 250px" enctype="multipart/form-data">
             <fieldset>
                 <div class="form-title" style="margin-top: 0">CHANGE BOOK IMAGE</div>
-                <input class="form-control form-control-lg" id="formFileLg" name="image" type="file">
+                <input class="form-control form-control-lg" id="formFileLg" name="formFileLg" type="file">
                 <input type="submit" value = "upload">
             </fieldset>
         </form>
