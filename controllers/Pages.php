@@ -57,4 +57,55 @@ class Pages
         return view('not_found');
     }
 
+    public
+    function dashboardItems(){
+        $books = Book::all();
+        $users = User::all();
+        return view("admin_panel", compact('books', 'users'));
+    }
+
+    public
+    function searchDashboard()
+    {
+        $title = $_GET["searchtitle"];
+        $books = Book::where('title', 'like', "%{$title}%")
+            ->get();
+
+        return view('admin_panel', compact('books'));
+    }
+    public
+    function testt(){
+        echo '<script>console.log("henlo")</script>';
+        dd("hello");
+    }
+    public
+    function changeBookPic(int $id){
+
+        $error = $_FILES["image"]["error"];
+        if ($error == UPLOAD_ERR_OK) {
+            $name = $_FILES["image"]["name"][$key];
+            $name = explode("_", $name);
+            $imagename='';
+            foreach($name as $letter){
+            $imagename .= $letter;
+        }
+
+        move_uploaded_file( $_FILES["image"]["tmp_name"][$key], "public/book_images/" .  $imagename);
+
+        return json([
+            'image_url' => $_SERVER['HTTP_REFERER'] . "/public/book_images/" . $imagename]
+        );
+        }
+    }
+
+    public
+    function changeProfilePic(int $id){
+        $image_url = Request::payload()->image_url;
+        $user = User::find($id);
+        $user->image_url = $image_url;
+        $user->update();
+    }
+
+
+
 }
