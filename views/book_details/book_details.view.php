@@ -9,14 +9,14 @@
 
     <title><?= $book->title ?></title>
 
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/public/css/styles.css">
 
     <script type="application/javascript"
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="application/javascript"
             src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 
-    <script type="application/javascript" src="/views/book_details/book_details.js"></script>
+    <script type="application/javascript" src="/public/js/book_details.js"></script>
 
 </head>
 

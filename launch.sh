@@ -11,4 +11,4 @@ python scripts/book_scraper/scraper.py
 python scripts/recommender_system/recommend.py repeat
 
 # Run server.
-python scripts/runner.py
+php -S localhost:9000

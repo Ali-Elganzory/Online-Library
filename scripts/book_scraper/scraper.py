@@ -12,6 +12,8 @@ username=''
 password=''
 db=''
 
+import os
+
 script_dir = os.path.dirname(__file__)
 rel_path = "../../config/db.json"
 abs_file_path = os.path.join(script_dir, rel_path)
