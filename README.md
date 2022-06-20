@@ -1,31 +1,33 @@
 # Online-Library
  
-## Database
 
-To initialize and populate data, run `scripts/init_database.sql` as a query.
+## Prerequisites:
+- MySQL server.
+- PHP >= 8.1.
+- Python 3 and pip.
 
 <br>
 
-## Debuging
+## Running
 
-To run a live server and watch for file changes, run `scripts/runner.py`.
+Run the `launch.sh` script.
 
-```powershell
-python scripts/runner.py
+```bash
+. launch.sh
 ```
 
-You may need to setup the needed packages.
+This will
+- Initialize the database and its tables and initial data.
+- Scrap the web for book information and add it to the database.
+- Run the books recommender system.
+- Run a local php server to serve the app at `localhost:9000`.
 
-Inside _scripts_ folder, run
+## Users
 
-using _pip_
+**Normal user**
+Username: Conner Walsh
+Password: 111111
 
-```powershell
-pip install -r requirements.txt
-```
-
-or _conda_:
-
-```powershell
-conda install --file requirements.txt
-```
+**Admin user**
+Username: admin
+Password: admin

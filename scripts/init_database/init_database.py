@@ -27,4 +27,4 @@ if __name__ == "__main__":
                     query = text(stmt)
                     connection.execute(query)
 
-        Print("[Database initialization]: succeeded.")
+        print("[Database initialization]: succeeded.")
