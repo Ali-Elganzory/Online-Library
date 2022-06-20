@@ -12,6 +12,11 @@ class Pages
     public
     function home()
     {
+        # If user is admin, redirect to dashboard.
+        if (Request::$user->is_admin) {
+            return $this->dashboardItems();
+        }
+
         $books = Book::all();
         $recommendedBooks = Authentication::$user->recommendedBooks();
 
@@ -58,7 +63,13 @@ class Pages
     }
 
     public
-    function dashboardItems(){
+    function dashboardItems()
+    {
+        # If user is not admin, redirect to home.
+        if (!Request::$user->is_admin) {
+            return $this->home();
+        }
+
         $books = Book::all();
         $users = User::all();
         return view("admin_panel", compact('books', 'users'));
@@ -67,45 +78,54 @@ class Pages
     public
     function searchDashboard()
     {
+        # If user is not admin, redirect to home.
+        if (!Request::$user->is_admin) {
+            return $this->home();
+        }
+
         $title = $_GET["searchtitle"];
         $books = Book::where('title', 'like', "%{$title}%")
             ->get();
 
         return view('admin_panel', compact('books'));
     }
+
     public
-    function testt(){
+    function testt()
+    {
         echo '<script>console.log("henlo")</script>';
         dd("hello");
     }
+
     public
-    function changeBookPic(int $id){
+    function changeBookPic(int $id)
+    {
 
         $error = $_FILES["image"]["error"];
         if ($error == UPLOAD_ERR_OK) {
             $name = $_FILES["image"]["name"][$key];
             $name = explode("_", $name);
-            $imagename='';
-            foreach($name as $letter){
-            $imagename .= $letter;
-        }
+            $imagename = '';
+            foreach ($name as $letter) {
+                $imagename .= $letter;
+            }
 
-        move_uploaded_file( $_FILES["image"]["tmp_name"][$key], "public/book_images/" .  $imagename);
+            move_uploaded_file($_FILES["image"]["tmp_name"][$key], "public/book_images/" . $imagename);
 
-        return json([
-            'image_url' => $_SERVER['HTTP_REFERER'] . "/public/book_images/" . $imagename]
-        );
+            return json([
+                    'image_url' => $_SERVER['HTTP_REFERER'] . "/public/book_images/" . $imagename]
+            );
         }
     }
 
     public
-    function changeProfilePic(int $id){
+    function changeProfilePic(int $id)
+    {
         $image_url = Request::payload()->image_url;
         $user = User::find($id);
         $user->image_url = $image_url;
         $user->update();
     }
-
 
 
 }

@@ -2,7 +2,6 @@
 
 class Dashboard
 {
-
     public
     function nextBooks(int $loaded){
         $loaded = $loaded + 21;
@@ -12,6 +11,7 @@ class Dashboard
 
         return view("admin_panel", compact('books'));
     }
+
     public
     function prevBooks(int $loaded){
         $lowerLimit = $loaded - 21;

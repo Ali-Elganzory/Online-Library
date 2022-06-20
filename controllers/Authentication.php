@@ -115,6 +115,7 @@ class Authentication
             $decodedToken = $encodedToken->decode();
             $payload = $decodedToken->getPayload();
             static::$user = User::find($payload["user_id"]);
+            Request::$user = static::$user;
         }catch (Exception $e){
             redirect('/login');
         }
