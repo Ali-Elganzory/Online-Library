@@ -11,7 +11,12 @@ host=''
 username=''
 password=''
 db=''
-with open('../config/db.json', 'r') as config_file:
+
+script_dir = os.path.dirname(__file__)
+rel_path = "../../config/db.json"
+abs_file_path = os.path.join(script_dir, rel_path)
+
+with open(abs_file_path, 'r') as config_file:
     config_data = json.load(config_file)
     host = config_data['host']
     username = config_data['username']
