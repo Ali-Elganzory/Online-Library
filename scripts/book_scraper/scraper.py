@@ -91,7 +91,7 @@ scrape_db = pymysql.connect(host = host,
                             password = password,
                             database = db)
 
-mySql_insert = """INSERT INTO BOOKS (TITLE, AUTHOR, DESCRIPTION, IMAGE_URL, VIEWS)
+mySql_insert = """INSERT INTO books (TITLE, AUTHOR, DESCRIPTION, IMAGE_URL, VIEWS)
                     VALUES (%s,%s,%s,%s,%s)"""
 
 cursor = scrape_db.cursor()

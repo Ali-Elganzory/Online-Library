@@ -10,9 +10,12 @@
 
 ## Running
 
-There are two ways.
+There are three ways.
 
-1. Run the `launch.sh` script.
+1. [Recommended] Open the deployed version at `http://library.alielganzory.me`.
+
+
+2. Run the `launch.sh` script.
 
 ```bash
 . launch.sh
@@ -24,7 +27,7 @@ This will
 - Run the books recommender system.
 - Run a local php server to serve the app at `localhost:9000`.
 
-2. Run the commands
+3. Run the commands
 
 ```powershell
 python scripts/init_database.py
