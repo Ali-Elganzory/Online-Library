@@ -5,7 +5,7 @@ pip install -r requirements.txt
 python scripts/init_database/init_database.py
 
 # Scrap books from the web.
-python scripts/book_scraper/scraper.py
+python scripts/book_scraper/scraper.py --number 25
 
 # Run the recommender system.
 python scripts/recommender_system/recommend.py repeat

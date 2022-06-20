@@ -5,7 +5,7 @@ import schedule
 import pandas as pd
 import numpy as np
 
-import recommender_system.database as db
+import database as db
 
 # Config
 K = 5  # number of the closest users to predict from
