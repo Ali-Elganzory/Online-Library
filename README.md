@@ -36,9 +36,13 @@ php -S localhost:9000
 ## Users
 
 **Normal user**
+
 Username: Conner Walsh
+
 Password: 111111
 
 **Admin user**
+
 Username: admin
+
 Password: admin
