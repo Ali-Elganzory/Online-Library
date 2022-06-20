@@ -33,6 +33,7 @@ class Authentication
             ],400);
         }
 
+        $password = password_hash($password, null);
         $user = new User(0, $username, $password, '');
 
         $user->insert();
@@ -40,7 +41,6 @@ class Authentication
         $tokenEncoded = (
         new TokenDecoded(
             payload: [
-
                 'admin' => false,
                 'exp' => time() + $this->exp
             ],
@@ -79,7 +79,7 @@ class Authentication
 
         $tokenEncoded = (new TokenDecoded(
             payload: [
-                'admin' => false,
+                'admin' => $user->is_admin,
                 'user_id' => $user->id,
                 'exp' => time() + $this->exp,
             ],

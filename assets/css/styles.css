@@ -1,3 +1,13 @@
+/***********
+    config
+ ***********/
+
+:root {
+    --primary-color: #6C63FF;
+}
+
+/***********/
+
 html, body {
     margin: 0;
     font-family: "Segoe UI", Arial, Calibri, "Roboto Light", serif;
@@ -393,11 +403,11 @@ html, body {
 */
 
 .color-primary {
-    color: #6C63FF;
+    color: var(--primary-color);
 }
 
 .bg-primary {
-    background-color: #6C63FF;
+    background-color: var(--primary-color);
 }
 
 .bg-light-primary {
@@ -536,7 +546,7 @@ html, body {
     border-width: 0;
     border-radius: 0.5em;
     color: #FFFFFF;
-    background-color: #6C63FF;
+    background-color: var(--primary-color);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 16%);
     cursor: pointer;
 }
@@ -814,10 +824,10 @@ html, body {
 }
 
 .loader4-color-primary::after {
-    background: #6C63FF;
+    background: var(--primary-color);
 }
 
 .loader4-color-primary span::before,
 .loader4-color-primary span::after {
-    background: #6C63FF;
+    background: var(--primary-color);
 }

@@ -27,7 +27,8 @@ CREATE TABLE users
     id        INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username  VARCHAR(100) NOT NULL,
     password  VARCHAR(100) NOT NULL,
-    image_url VARCHAR(100) NOT NULL
+    image_url VARCHAR(100) NOT NULL,
+    is_admin  BOOLEAN      NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE user_favourites
@@ -82,6 +83,12 @@ VALUES ("Tegan Price",
        ("Connor Walsh",
         "$2y$10$fYN3/Wa9GAjTOCTs5vHPKuT8f5.Be6F.qmpUOB0Pp/92HTjz8mlBi",
         "https://www.cheatsheet.com/wp-content/uploads/2020/05/How-to-Get-Away-With-Murder-Connor.jpg");
+
+INSERT INTO users (username, password, image_url, is_admin)
+VALUES ("admin",
+        "$2y$10$dEDQI0FxotLZLJdpWf3TsOauZChX2ERz1Mazj2tDTuDLhcgOfarqi",
+        "https://tvline.com/wp-content/uploads/2019/11/htgawm-6x07-4.jpg",
+        TRUE);
 
 INSERT INTO user_favourites (user_id, book_id)
 VALUES (1, 1),

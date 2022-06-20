@@ -9,6 +9,7 @@ class User extends Model
         public string $username,
         public string $password,
         public string $image_url,
+        public bool   $is_admin,
     )
     {
     }

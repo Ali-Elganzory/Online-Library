@@ -3,8 +3,6 @@ pandas
 schedule
 sqlalchemy
 pymysql
-selenium
-watchdog
 bs4
 beautifulsoup4
 requests

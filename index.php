@@ -7,7 +7,6 @@ require_once 'vendor/autoload.php';
 // Bootstrap.
 require_once 'core/bootstrap.php';
 
-
 // Direct request.
 Router::load('routes.php')
     ->direct(

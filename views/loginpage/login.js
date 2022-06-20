@@ -15,7 +15,6 @@ window.onload = function () {
                 'Accept': 'application/json',
             },
             body: JSON.stringify({
-
                 username: form1.username.value,
                 password: form1.password.value
             })
@@ -25,6 +24,9 @@ window.onload = function () {
             const jwt = await res.json();
             Cookies.set('token', jwt.token, {expires:1});
             login_error.style.display = "none";
+
+            // Redirect to home page.
+            window.location.href = "/";
         } else {
             // Handle errors
             login_error.style.display = "block";
@@ -41,7 +43,6 @@ window.onload = function () {
                 'Accept': 'application/json',
             },
             body: JSON.stringify({
-
                 username: form2.newusername.value,
                 password: form2.newpassword.value
             })
@@ -51,6 +52,9 @@ window.onload = function () {
             const jwt = await res.json();
             Cookies.set('token', jwt.token, {expires:1});
             register_error.style.display = "none";
+
+            // Redirect to home page.
+            window.location.href = "/";
         } else {
             // Handle errors
             register_error.style.display = "block";
